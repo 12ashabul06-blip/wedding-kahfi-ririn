@@ -5,14 +5,13 @@
 /* =====================================================
    TAMBAHAN: VIDEO GLOBAL, HALAMAN TRANSPARAN & HADIAH
    ===================================================== */
-.global-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2;pointer-events:none;}
+.global-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:-2;pointer-events:none;background:#142238}
 /* Lapisan halaman tetap di atas video global. Background yang sudah ada tetap dipertahankan. */
 .page{isolation:isolate}
 /* Tambahkan salah satu class ini pada section bila ingin video global terlihat di baliknya:
    video-transparent = transparan, video-light = putih transparan, video-navy = navy transparan.
    Contoh: class="page intro video-light" */
-.page.video-transparent{background-color: transparent !important;
-    background-image: none !important;}
+.page.video-transparent{background-color:rgba(245,243,238,.18)!important}
 .page.video-light{background-color:rgba(245,243,238,.82)!important}
 .page.video-navy{background-color:rgba(20,34,56,.78)!important;color:#f4f0e8}
 .page.video-navy h2,.page.video-navy p{color:inherit}
