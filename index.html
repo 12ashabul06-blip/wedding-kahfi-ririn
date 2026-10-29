@@ -9,6 +9,39 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+ <!-- VIDEO BACKGROUND GLOBAL -->
+<video
+    id="globalBackgroundVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+    aria-hidden="true"
+>
+    <source
+        src="images/video-background.mp4"
+        type="video/mp4"
+    >
+</video>
+
+<!-- MUSIK UNDANGAN -->
+<audio
+    id="weddingMusic"
+    src="images/music.mp3"
+    loop
+    preload="auto"
+></audio>
+ <!-- TOMBOL MUSIK -->
+<button
+    id="musicToggle"
+    class="music-toggle"
+    type="button"
+    aria-label="Putar musik"
+    aria-pressed="false"
+>
+    <span id="musicIcon">♫</span>
+</button>
 <div class="loading" id="loading"><span class="monogram">K<span>&</span>R</span><small>THE WEDDING OF</small></div>
 <header class="topbar"><a class="brand" href="#cover">K<span>&</span>R</a><div class="top-caption">THE WEDDING OF <b>KAHFI & RIRIN</b></div><button class="music" id="musicBtn" aria-label="Putar musik">♫ <span>Music</span></button></header>
 <main>
