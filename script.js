@@ -50,3 +50,113 @@ document.querySelectorAll(".gift-copy-btn").forEach(button => {
         }
     });
 });
+/* =====================================
+   GLOBAL VIDEO & WEDDING MUSIC
+   ===================================== */
+
+(() => {
+    const video = document.getElementById("globalBackgroundVideo");
+    const music = document.getElementById("weddingMusic");
+    const musicButton = document.getElementById("musicToggle");
+    const musicIcon = document.getElementById("musicIcon");
+
+    if (!video || !music) return;
+
+    // Video background selalu senyap dan berulang
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+
+    video.play().catch(() => {
+        // Browser mungkin menunggu interaksi pengguna.
+    });
+
+    let musicStarted = false;
+
+    async function startMusic() {
+        if (!music.paused) {
+            updateMusicButton();
+            return;
+        }
+
+        try {
+            await music.play();
+            musicStarted = true;
+            updateMusicButton();
+        } catch (error) {
+            // Jika autoplay diblokir, pengguna bisa menekan tombol musik.
+            updateMusicButton();
+        }
+    }
+
+    function updateMusicButton() {
+        if (!musicButton) return;
+
+        const playing = !music.paused;
+
+        musicButton.classList.toggle("is-playing", playing);
+        musicButton.setAttribute("aria-pressed", String(playing));
+        musicButton.setAttribute(
+            "aria-label",
+            playing ? "Jeda musik" : "Putar musik"
+        );
+
+        if (musicIcon) {
+            musicIcon.textContent = playing ? "♫" : "♪";
+        }
+    }
+
+    // Tombol musik untuk memutar atau menjeda
+    musicButton?.addEventListener("click", async () => {
+        if (music.paused) {
+            await startMusic();
+        } else {
+            music.pause();
+            updateMusicButton();
+        }
+    });
+
+    /*
+     * Tombol Buka Undangan:
+     * musik dimulai saat pengguna menekan tombol.
+     * Tidak mengganggu fungsi buka undangan yang sudah ada.
+     */
+    document.querySelectorAll(
+        "#openInvitation, .open-invitation, [data-open-invitation]"
+    ).forEach(button => {
+        button.addEventListener("click", () => {
+            startMusic();
+        });
+    });
+
+    /*
+     * Jika pengunjung menggeser ke halaman kedua
+     * atau halaman setelah cover, coba mulai musik.
+     */
+    const pages = document.querySelectorAll(".page");
+
+    if (pages.length > 1 && "IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(entries => {
+            for (const entry of entries) {
+                const pageIndex = Array.from(pages).indexOf(entry.target);
+
+                if (
+                    entry.isIntersecting &&
+                    pageIndex > 0 &&
+                    !musicStarted
+                ) {
+                    startMusic();
+                }
+            }
+        }, {
+            threshold: 0.55
+        });
+
+        pages.forEach(page => observer.observe(page));
+    }
+
+    music.addEventListener("play", updateMusicButton);
+    music.addEventListener("pause", updateMusicButton);
+
+    updateMusicButton();
+})();
