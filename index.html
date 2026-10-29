@@ -10,14 +10,14 @@
 </head>
 <body>
 <!-- VIDEO GLOBAL: ganti file images/video-background.mp4 di GitHub -->
-<video id="globalBackgroundVideo" autoplay muted loop playsinline>
-    <source src="images/video-background.mp4" type="video/mp4">
+<video id="globalBackgroundVideo" class="global-video" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+  <source src="images/video-background.mp4" type="video/mp4">
 </video>
 <div class="loading" id="loading"><span class="monogram">K<span>&</span>R</span><small>THE WEDDING OF</small></div>
 <header class="topbar"><a class="brand" href="#cover">K<span>&</span>R</a><div class="top-caption">THE WEDDING OF <b>KAHFI & RIRIN</b></div><button class="music" id="musicBtn" aria-label="Putar musik">♫ <span>Music</span></button></header>
 <main>
 <section class="page cover active" id="cover" data-label="Cover">
- <div class="cover-photo photo-bg" style="--photo:url('images/video-background.mp4')"></div><div class="cover-shade"></div>
+ <div class="cover-photo photo-bg" style="--photo:url('assets/demo-25-10.webp')"></div><div class="cover-shade"></div>
  <div class="cover-content"><p class="eyebrow">THE WEDDING OF</p><h1>Kahfi <i>&</i><br>Ririn</h1><div class="gold-rule"></div><p class="cover-date">25 — 26 NOVEMBER 2026</p><button class="open-btn" data-go="intro">Buka Undangan <span>↗</span></button></div>
  <div class="cover-bottom"><span>MAKASSAR · INDONESIA</span><span>SCROLL TO EXPLORE ↓</span></div>
 </section>
@@ -26,7 +26,7 @@
  <div class="intro-copy"><p class="eyebrow">BISMILLAHIRRAHMANIRRAHIM</p><h2>Two souls,<br><em>one beautiful</em><br>journey.</h2><p class="body-copy">Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dalam hari bahagia pernikahan kami.</p><div class="signature">Kahfi <span>&</span> Ririn</div></div>
  <div class="intro-number">01 <span>/ 07</span></div>
 </section>
-<section class="page video-transparent" id="couple" data-label="Mempelai">
+<section class="page profile" id="couple" data-label="Mempelai">
  <div class="section-heading"><p class="eyebrow">MEET THE COUPLE</p><h2>With love, <em>we begin.</em></h2></div>
  <div class="couple-grid">
   <article class="person person-left"><div class="person-image"><img src="assets/demo-25-13.webp" alt="Potret mempelai wanita"></div><div class="person-card"><span class="person-index">01 / THE BRIDE</span><h3>Ririn<br><em>Aprillia</em></h3><p>Putri pertama dari</p><p class="parents">Bapak Saleh C<br>& Ibu Hj. Hadinah</p><a class="social" href="https://instagram.com/rhirinaprillia_" target="_blank" rel="noreferrer">@rhirinaprillia_ ↗</a></div></article>
@@ -40,7 +40,7 @@
  <div class="event-row"><span class="event-no">02</span><div><h3>Resepsi</h3><p>Kamis, 26 November 2026</p><p>13.00 — 17.00 WITA</p></div><span class="event-symbol">✳</span></div>
  <div class="venue-note">LOKASI ACARA<br><strong>Informasi lokasi akan diperbarui</strong></div><a class="outline-btn" href="#rsvp">Konfirmasi Kehadiran ↗</a></div><div class="section-index">03 <span>/ 07</span></div>
 </section>
-<section class="page story video transparent" id="story" data-label="Cerita">
+<section class="page story" id="story" data-label="Cerita">
  <div class="story-head"><p class="eyebrow">A LITTLE PIECE OF OUR STORY</p><h2>Every love story<br>is <em>beautiful.</em></h2><p class="body-copy">Dan ini adalah awal dari cerita kami — sebuah perjalanan yang akan terus ditulis, bersama.</p></div>
  <div class="story-gallery"><figure class="story-large"><img src="assets/demo-25-14.webp" alt="Kenangan bersama"><figcaption>THE BEGINNING</figcaption></figure><figure class="story-small"><img src="assets/demo-25-3.webp" alt="Potret kenangan"><figcaption>YOU & ME</figcaption></figure><div class="story-quote">“And suddenly,<br>all the love songs<br>were about you.”</div></div><div class="section-index">04 <span>/ 07</span></div>
 </section>
@@ -66,6 +66,6 @@
 </main>
 <nav class="bottom-nav" aria-label="Navigasi undangan"><a href="#cover" class="nav-item selected"><span>⌂</span><small>Home</small></a><a href="#couple" class="nav-item"><span>♡</span><small>Mempelai</small></a><a href="#event" class="nav-item"><span>✳</span><small>Acara</small></a><a href="#gallery" class="nav-item"><span>▧</span><small>Galeri</small></a><a href="#rsvp" class="nav-item"><span>✉</span><small>Ucapan</small></a><a href="#gift" class="nav-item"><span>♡</span><small>Hadiah</small></a></nav>
 <button class="whatsapp-float" id="shareBtn" aria-label="Bagikan undangan">↗</button>
-<audio id="weddingMusic" src="images/music.mp3" loop preload="auto"></audio>
+<audio id="bgMusic" src="images/music.mp3" loop preload="auto"></audio>
 <script src="script.js"></script>
 </body></html>
