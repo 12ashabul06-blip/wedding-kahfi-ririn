@@ -21,3 +21,18 @@ audio.addEventListener('play',updateMusicUI);audio.addEventListener('pause',upda
 document.querySelectorAll('[data-copy-target]').forEach(button=>button.addEventListener('click',async()=>{const target=document.getElementById(button.dataset.copyTarget);if(!target)return;const value=target.textContent.trim();if(value.startsWith('ISI_')){alert('Silakan ganti placeholder dengan nomor yang benar di index.html terlebih dahulu.');return;}try{await navigator.clipboard.writeText(value);const old=button.textContent;button.textContent='Berhasil disalin ✓';setTimeout(()=>button.textContent=old,1800);}catch(e){prompt('Salin nomor berikut:',value);}}));
 document.getElementById('wishForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('guestName').value.trim(),att=document.getElementById('attendance').value,msg=document.getElementById('message').value.trim();const text=`Assalamu'alaikum Kahfi & Ririn, saya ${name}. Konfirmasi: ${att}.\n\nUcapan & doa: ${msg}`;const url='https://wa.me/?text='+encodeURIComponent(text);window.open(url,'_blank','noopener');});
 document.getElementById('shareBtn').addEventListener('click',async()=>{const shareData={title:'Undangan Kahfi & Ririn',text:'Dengan bahagia, kami mengundang Anda ke pernikahan Kahfi & Ririn.',url:location.href};if(navigator.share){try{await navigator.share(shareData)}catch(e){}}else{try{await navigator.clipboard.writeText(location.href);alert('Tautan undangan disalin.')}catch(e){prompt('Salin tautan undangan ini:',location.href)}}});
+
+/* NAMA TAMU UNDANGAN OTOMATIS */
+const guestParams = new URLSearchParams(window.location.search);
+const guestName = guestParams.get('to')?.trim() || 'Tamu Undangan';
+
+const coverGuest = document.getElementById('inviteGuestName');
+const introGuest = document.getElementById('inviteGuestNameIntro');
+
+if (coverGuest) {
+  coverGuest.textContent = guestName;
+}
+
+if (introGuest) {
+  introGuest.textContent = guestName;
+}
