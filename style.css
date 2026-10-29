@@ -124,3 +124,102 @@
         padding: 22px 12px;
     }
 }
+/* =====================================
+   GLOBAL VIDEO BACKGROUND
+   ===================================== */
+
+#globalBackgroundVideo {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Konten undangan berada di atas video */
+main,
+.page,
+nav,
+header,
+footer,
+.music-toggle {
+    position: relative;
+}
+
+/* Halaman transparan: video tetap terlihat */
+.page.video-transparent {
+    background-color: rgba(245, 243, 238, 0.18);
+}
+
+/* Halaman putih transparan */
+.page.video-light {
+    background-color: rgba(245, 243, 238, 0.82);
+}
+
+/* Halaman dengan warna navy transparan */
+.page.video-navy {
+    background-color: rgba(20, 34, 56, 0.78);
+}
+
+/* Halaman dengan foto background sendiri */
+.page.photo-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* =====================================
+   MUSIC BUTTON
+   ===================================== */
+
+.music-toggle {
+    position: fixed;
+    right: 18px;
+    bottom: 90px;
+    z-index: 9999;
+
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d8b875;
+    background: rgba(20, 34, 56, 0.9);
+    color: #f4dfaa;
+
+    font-size: 25px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.music-toggle.is-playing span {
+    animation: musicRotate 4s linear infinite;
+}
+
+@keyframes musicRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Navigasi harus tetap berada di atas video */
+nav {
+    z-index: 20;
+}
+
+/* Pastikan konten utama berada di atas video */
+main {
+    z-index: 1;
+}
+
+@media (max-width: 600px) {
+    .music-toggle {
+        right: 14px;
+        bottom: 82px;
+    }
+}
