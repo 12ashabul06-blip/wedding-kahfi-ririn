@@ -38,3 +38,37 @@ body{background:transparent}
 .story{background:rgba(233,231,226,.80)}
 .gallery{background:rgba(216,217,215,.82)}
 .gift-page{background:rgba(245,243,238,.84)}
+
+/* NAMA TAMU UNDANGAN */
+.guest-greeting {
+  position: relative;
+  z-index: 2;
+  margin: 0 0 25px;
+  color: #f5f0e8;
+  font-size: 11px;
+  line-height: 1.9;
+  letter-spacing: 1px;
+}
+
+.guest-greeting strong {
+  display: inline-block;
+  margin-top: 4px;
+  color: #f0d89d;
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: .5px;
+  overflow-wrap: anywhere;
+}
+
+.guest-intro {
+  margin-top: 20px;
+  color: var(--navy);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.guest-intro strong {
+  color: #9c7c40;
+  font-weight: 600;
+}
