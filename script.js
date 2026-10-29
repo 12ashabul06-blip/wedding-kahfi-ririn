@@ -9,3 +9,44 @@ const revealObserver=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.
 const audio=document.getElementById('bgMusic'),musicBtn=document.getElementById('musicBtn');let playing=false;musicBtn.addEventListener('click',async()=>{if(playing){audio.pause();playing=false;musicBtn.innerHTML='♫ <span>Music</span>';return}try{await audio.play();playing=true;musicBtn.innerHTML='Ⅱ <span>Pause</span>'}catch(e){alert('Tambahkan file musik bernama assets/music.mp3 untuk mengaktifkan musik.')}});
 document.getElementById('wishForm').addEventListener('submit',e=>{e.preventDefault();const name=document.getElementById('guestName').value.trim(),att=document.getElementById('attendance').value,msg=document.getElementById('message').value.trim();const text=`Assalamu'alaikum Kahfi & Ririn, saya ${name}. Konfirmasi: ${att}.\n\nUcapan & doa: ${msg}`;const url='https://wa.me/?text='+encodeURIComponent(text);window.open(url,'_blank','noopener');});
 document.getElementById('shareBtn').addEventListener('click',async()=>{const shareData={title:'Undangan Kahfi & Ririn',text:'Dengan bahagia, kami mengundang Anda ke pernikahan Kahfi & Ririn.',url:location.href};if(navigator.share){try{await navigator.share(shareData)}catch(e){}}else{try{await navigator.clipboard.writeText(location.href);alert('Tautan undangan disalin.')}catch(e){prompt('Salin tautan undangan ini:',location.href)}}});
+/* =================================
+   WEDDING GIFT - COPY ACCOUNT NUMBER
+   ================================= */
+
+document.querySelectorAll(".gift-copy-btn").forEach(button => {
+    button.addEventListener("click", async () => {
+        const targetId = button.dataset.copy;
+        const target = document.getElementById(targetId);
+
+        if (!target) return;
+
+        const accountNumber = target.textContent.trim();
+
+        // Cegah nomor placeholder ikut disalin
+        if (
+            accountNumber.startsWith("NOMOR_") ||
+            accountNumber.includes("NAMA_PEMILIK")
+        ) {
+            alert("Silakan masukkan nomor rekening atau DANA yang benar terlebih dahulu.");
+            return;
+        }
+
+        try {
+            await navigator.clipboard.writeText(accountNumber);
+
+            const originalText = button.textContent;
+            button.textContent = "Berhasil Disalin ✓";
+
+            setTimeout(() => {
+                button.textContent = originalText;
+            }, 2000);
+
+        } catch (error) {
+            // Alternatif untuk browser yang tidak mendukung Clipboard API
+            window.prompt(
+                "Salin nomor berikut:",
+                accountNumber
+            );
+        }
+    });
+});
