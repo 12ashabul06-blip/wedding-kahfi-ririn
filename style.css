@@ -72,3 +72,47 @@ body{background:transparent}
   color: #9c7c40;
   font-weight: 600;
 }
+/* ===== TEXT SHADOW HALAMAN 1, 4, 5, 7 ===== */
+
+/* Halaman 1 - Cover */
+#cover h1,
+#cover h2,
+#cover p,
+#cover span,
+#cover .couple-names,
+#cover .cover-title {
+text-shadow: 0 2px 5px rgba(0, 0, 0, 0.75),
+0 4px 12px rgba(0, 0, 0, 0.45);
+}
+
+/* Halaman 4 - Events */
+#events h1,
+#events h2,
+#events h3,
+#events p,
+#events span,
+#events strong,
+#events a {
+text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+}
+
+/* Halaman 5 - Story */
+#story h1,
+#story h2,
+#story h3,
+#story p,
+#story span,
+#story strong {
+text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
+}
+
+/* Halaman 7 - Gift */
+#gift h1,
+#gift h2,
+#gift h3,
+#gift p,
+#gift span,
+#gift strong,
+#gift a {
+text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
