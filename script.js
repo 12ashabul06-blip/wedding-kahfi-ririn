@@ -1,15 +1,22 @@
+
 const loading = document.getElementById('loading');
+
+const loadingStart = Date.now();
+const minimumLoadingTime = 3000;
 
 function hideLoading() {
   if (!loading) return;
-  loading.classList.add('done');
+
+  const elapsed = Date.now() - loadingStart;
+  const remaining = Math.max(0, minimumLoadingTime - elapsed);
+
+  setTimeout(() => {
+    loading.classList.add('done');
+  }, remaining);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  setTimeout(hideLoading, 500);
-});
-
 window.addEventListener('load', hideLoading);
+
 document.querySelectorAll('[data-go]').forEach(btn=>btn.addEventListener('click',()=>document.getElementById(btn.dataset.go)?.scrollIntoView({behavior:'smooth'})));
 const sections=[...document.querySelectorAll('.page')], navItems=[...document.querySelectorAll('.nav-item')];
 const navTargets=['cover','couple','event','gallery','rsvp'];
