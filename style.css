@@ -34,10 +34,10 @@
 body{background:transparent}
 .global-video{z-index:-1}
 /* Contoh section terang yang memperlihatkan video secara samar. */
-.intro{background:rgba(238,236,231,.78)}
-.story{background:rgba(233,231,226,.80)}
-.gallery{background:rgba(216,217,215,.82)}
-.gift-page{background:rgba(245,243,238,.84)}
+.intro{background:rgba(238,236,231,.55)}
+.story{background:rgba(233,231,226,.55)}
+.gallery{background:rgba(216,217,215,.55)}
+.gift-page{background:rgba(245,243,238,.55)}
 
 /* NAMA TAMU UNDANGAN */
 .guest-greeting {
@@ -71,58 +71,4 @@ body{background:transparent}
 .guest-intro strong {
   color: #9c7c40;
   font-weight: 600;
-}
-
-/* =================================================
-   GLOBAL GLASS TRANSPARENCY - KAHFI & RIRIN
-   ================================================= */
-
-/* Panel profil mempelai */
-.person-card {
-  background: rgba(245, 243, 238, 0.55) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-/* Bagian acara */
-.events {
-  background: rgba(20, 34, 56, 0.76) !important;
-}
-
-/* Panel ucapan */
-.wishes {
-  background: rgba(20, 34, 56, 0.72) !important;
-}
-
-/* Panel hadiah */
-.gift-page {
-  background: rgba(245, 243, 238, 0.55) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-.gift-card {
-  background: rgba(20, 34, 56, 0.68) !important;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
-
-/* Latar bagian cerita dan galeri */
-.intro {
-  background: rgba(238, 236, 231, 0.55) !important;
-}
-
-.story {
-  background: rgba(233, 231, 226, 0.55) !important;
-}
-
-.gallery {
-  background: rgba(216, 217, 215, 0.55) !important;
-}
-
-/* Efek transparansi pada panel lainnya */
-.glass-panel {
-  background: rgba(245, 243, 238, 0.50) !important;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
 }
