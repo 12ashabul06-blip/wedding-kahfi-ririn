@@ -1,5 +1,15 @@
-const loading=document.getElementById('loading');
-window.addEventListener('load',()=>setTimeout(()=>loading.classList.add('done'),650));
+const loading = document.getElementById('loading');
+
+function hideLoading() {
+  if (!loading) return;
+  loading.classList.add('done');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(hideLoading, 500);
+});
+
+window.addEventListener('load', hideLoading);
 document.querySelectorAll('[data-go]').forEach(btn=>btn.addEventListener('click',()=>document.getElementById(btn.dataset.go)?.scrollIntoView({behavior:'smooth'})));
 const sections=[...document.querySelectorAll('.page')], navItems=[...document.querySelectorAll('.nav-item')];
 const navTargets=['cover','couple','event','gallery','rsvp'];
