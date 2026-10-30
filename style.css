@@ -34,10 +34,10 @@
 body{background:transparent}
 .global-video{z-index:-1}
 /* Contoh section terang yang memperlihatkan video secara samar. */
-.intro{background:rgba(238,236,231,.55)}
-.story{background:rgba(233,231,226,.55)}
-.gallery{background:rgba(216,217,215,.55)}
-.gift-page{background:rgba(245,243,238,.55)}
+.intro{background:rgba(238,236,231,.35)}
+.story{background:rgba(233,231,226,.35)}
+.gallery{background:rgba(216,217,215,.35)}
+.gift-page{background:rgba(245,243,238,.35)}
 
 /* NAMA TAMU UNDANGAN */
 .guest-greeting {
