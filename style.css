@@ -75,14 +75,41 @@ body{background:transparent}
 /* ===== TEXT SHADOW HALAMAN 1, 4, 5, 7 ===== */
 
 /* Halaman 1 - Cover */
-#cover h1,
-#cover h2,
-#cover p,
-#cover span,
-#cover .couple-names,
-#cover .cover-title {
-text-shadow: 0 2px 5px rgba(0, 0, 0, 0.75),
-0 4px 12px rgba(0, 0, 0, 0.45);
+/* ===== TEXT SHADOW HALAMAN INTRO ===== */
+
+/* Judul utama */
+.intro-copy h2 {
+text-shadow: 0 2px 5px rgba(255, 255, 255, 0.45),
+0 3px 8px rgba(0, 0, 0, 0.22);
+}
+
+/* Tulisan Bismillah */
+.intro-copy .eyebrow {
+text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* Paragraf undangan */
+.intro-copy .body-copy {
+text-shadow: 0 1px 3px rgba(255, 255, 255, 0.65),
+0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Kepada Yth. dan nama tamu */
+.intro-copy .guest-intro,
+.intro-copy .guest-intro strong {
+text-shadow: 0 1px 4px rgba(255, 255, 255, 0.6),
+0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+/* Nama Kahfi & Ririn */
+.intro-copy .signature {
+text-shadow: 0 2px 5px rgba(255, 255, 255, 0.5),
+0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Simbol & pada nama pasangan */
+.intro-copy .signature span {
+text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* Halaman 4 - Events */
