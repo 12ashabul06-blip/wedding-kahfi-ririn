@@ -219,7 +219,7 @@ text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 /* BISMILLAH */
 .page.intro .intro-top .eyebrow {
   margin: 0 0 12px;
-  text-align: left;
+  text-align: right;
   color: #4d4438;
   font-size: clamp(12px, 2.5vw, 17px);
   line-height: 1.5;
