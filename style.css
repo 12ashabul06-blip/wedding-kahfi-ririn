@@ -143,3 +143,121 @@ text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
 #gift a {
 text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
+
+/* =================================
+   INTRO - THREE ZONE CINEMATIC LAYOUT
+================================= */
+
+.intro {
+  position: relative;
+  overflow: hidden;
+}
+
+/* GRADASI BACKGROUND PUTIH ATAS DAN BAWAH */
+.intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.94) 0%,
+    rgba(255,255,255,0.94) 15%,
+    rgba(255,255,255,0.65) 20%,
+    rgba(255,255,255,0.08) 30%,
+    rgba(255,255,255,0.00) 75%,
+    rgba(255,255,255,0.55) 80%,
+    rgba(255,255,255,0.94) 100%
+  );
+}
+
+/* SEMUA ISI DI ATAS LAPISAN GRADASI */
+.intro > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* HILANGKAN DEKORASI SAMPING */
+.intro .intro-side {
+  display: none !important;
+}
+
+/* AREA TEKS */
+.intro .intro-copy {
+  position: absolute;
+  top: 8%;
+  bottom: 9%;
+  left: 8%;
+  right: 8%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: auto;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ZONA ATAS */
+.intro-top {
+  width: 100%;
+  text-align: center;
+}
+
+.intro-top .eyebrow {
+  margin-bottom: 12px;
+  color: #b49a5b;
+  text-shadow: 0 1px 5px rgba(255,255,255,0.8);
+}
+
+.intro-top h2 {
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(255,255,255,0.7);
+}
+
+/* ZONA BAWAH */
+.intro-bottom {
+  width: 100%;
+  text-align: center;
+}
+
+.intro-bottom .body-copy {
+  text-shadow: 0 1px 5px rgba(255,255,255,0.9);
+}
+
+.intro-bottom .guest-intro {
+  margin-top: 18px;
+  text-shadow: 0 1px 5px rgba(255,255,255,0.9);
+}
+
+.intro-bottom .signature {
+  margin-top: 30px;
+  text-shadow: 0 2px 8px rgba(255,255,255,0.8);
+}
+
+/* PENYESUAIAN HP */
+@media (max-width: 600px) {
+  .intro .intro-copy {
+    left: 8%;
+    right: 8%;
+    top: 8%;
+    bottom: 10%;
+  }
+
+  .intro-top h2 {
+    font-size: clamp(42px, 12vw, 58px);
+    line-height: 0.95;
+  }
+
+  .intro-bottom .body-copy {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .intro-bottom .signature {
+    font-size: 38px;
+  }
+}
