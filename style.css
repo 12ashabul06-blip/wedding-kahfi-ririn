@@ -326,3 +326,41 @@ text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
     font-size: clamp(29px, 7vw, 38px);
   }
 }
+/* TUKAR POSISI MEMPELAI DI HALAMAN PROFILE */
+
+#couple .couple-grid {
+  display: flex;
+  flex-direction: row;
+}
+
+#couple .person-left {
+  order: 2;
+}
+
+#couple .person-right {
+  order: 1;
+}
+
+#couple .ampersand {
+  order: 2;
+}
+
+/* Urutan pada layar HP */
+@media (max-width: 600px) {
+  #couple .couple-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #couple .person-left {
+    order: 2;
+  }
+
+  #couple .person-right {
+    order: 1;
+  }
+
+  #couple .ampersand {
+    order: 2;
+  }
+}
