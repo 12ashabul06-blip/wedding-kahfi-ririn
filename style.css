@@ -192,7 +192,7 @@ h2 em{font-weight:400;color:var(--gold2)}
   display:grid;grid-template-columns:44% 56%;align-items:stretch
 }
 .event-image{height:100%;min-height:100vh;overflow:hidden}
-.event-image img{filter:grayscale(0%);opacity:.100}
+.event-image img{filter:grayscale(0%);opacity:1}
 .event-panel{padding:14vh 10% 10vh 11%;align-self:center}
 .event-panel h2{color:#f0eee9;font-size:clamp(52px,6vw,82px)}
 .event-intro{color:#e0e2e5;margin-bottom:35px}
