@@ -210,25 +210,174 @@ document.querySelectorAll('[data-copy-target]').forEach((button) => {
   });
 });
 
-/* FORM UCAPAN VIA WHATSAPP */
-const wishForm = document.getElementById('wishForm');
+/* =====================================================
+   UCAPAN & KOMENTAR — SUPABASE
+   ===================================================== */
 
+const SUPABASE_URL = 'https://kmsjcvlmuoulkrkvisdq.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_iYEK2XYnUwOjaUcHiElx-Q_K1O5daxG';
+
+const wishForm = document.getElementById('wishForm');
+const wishList = document.getElementById('wishList');
+const wishStatus = document.getElementById('wishStatus');
+const wishCount = document.getElementById('wishCount');
+const wishSubmit = document.getElementById('wishSubmit');
+
+const supabaseHeaders = {
+  apikey: SUPABASE_KEY,
+  Authorization: `Bearer ${SUPABASE_KEY}`,
+  'Content-Type': 'application/json'
+};
+
+/* MEMUAT DAFTAR UCAPAN */
+async function loadWishes() {
+  if (!wishList) return;
+
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/wedding_wishes?select=guest_name,message,attendance,created_at&order=created_at.desc&limit=100`,
+      {
+        method: 'GET',
+        headers: supabaseHeaders
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(await response.text());
+    }
+
+    const wishes = await response.json();
+
+    wishList.replaceChildren();
+
+    if (wishCount) {
+      wishCount.textContent = `${wishes.length} ucapan`;
+    }
+
+    if (wishes.length === 0) {
+      const empty = document.createElement('p');
+      empty.className = 'comments-empty';
+      empty.textContent = 'Belum ada ucapan. Jadilah yang pertama mengirim doa!';
+      wishList.appendChild(empty);
+      return;
+    }
+
+    wishes.forEach((wish) => {
+      const item = document.createElement('article');
+      item.className = 'wish-comment';
+
+      const name = document.createElement('h3');
+      name.className = 'wish-comment-name';
+      name.textContent = wish.guest_name;
+
+      const message = document.createElement('p');
+      message.className = 'wish-comment-message';
+      message.textContent = wish.message;
+
+      const meta = document.createElement('div');
+      meta.className = 'wish-comment-meta';
+
+      const date = new Date(wish.created_at);
+      const formattedDate = date.toLocaleDateString('id-ID', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+
+      meta.textContent =
+        `${wish.attendance || 'Belum dikonfirmasi'} · ${formattedDate}`;
+
+      item.append(name, message, meta);
+      wishList.appendChild(item);
+    });
+
+  } catch (error) {
+    console.error('Gagal memuat ucapan:', error);
+
+    wishList.innerHTML =
+      '<p class="comments-empty">Ucapan belum dapat dimuat. Silakan muat ulang halaman.</p>';
+  }
+}
+
+/* MENGIRIM UCAPAN */
 if (wishForm) {
-  wishForm.addEventListener('submit', (event) => {
+  wishForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
     const name = document.getElementById('guestName').value.trim();
     const attendance = document.getElementById('attendance').value;
     const message = document.getElementById('message').value.trim();
 
-    const text =
-      `Assalamu'alaikum Kahfi & Ririn, saya ${name}. ` +
-      `Konfirmasi: ${attendance}.\n\nUcapan & doa: ${message}`;
+    if (!name || !message) {
+      alert('Silakan isi nama dan ucapan terlebih dahulu.');
+      return;
+    }
 
-    const url = 'https://wa.me/?text=' + encodeURIComponent(text);
-    window.open(url, '_blank', 'noopener');
+    if (name.length > 60 || message.length > 500) {
+      alert('Nama maksimal 60 karakter dan ucapan maksimal 500 karakter.');
+      return;
+    }
+
+    wishSubmit.disabled = true;
+    wishSubmit.textContent = 'Mengirim...';
+
+    if (wishStatus) {
+      wishStatus.textContent = 'Sedang menyimpan ucapan Anda...';
+    }
+
+    try {
+      const response = await fetch(
+        `${SUPABASE_URL}/rest/v1/wedding_wishes`,
+        {
+          method: 'POST',
+          headers: {
+            ...supabaseHeaders,
+            Prefer: 'return=minimal'
+          },
+          body: JSON.stringify({
+            guest_name: name,
+            attendance: attendance,
+            message: message
+          })
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+
+      wishForm.reset();
+
+      if (wishStatus) {
+        wishStatus.textContent = 'Terima kasih! Ucapan Anda berhasil dikirim.';
+      }
+
+      await loadWishes();
+
+      if (wishList) {
+        wishList.scrollTop = 0;
+      }
+
+    } catch (error) {
+      console.error('Gagal mengirim ucapan:', error);
+
+      if (wishStatus) {
+        wishStatus.textContent =
+          'Ucapan belum berhasil dikirim. Silakan coba kembali.';
+      }
+
+    } finally {
+      wishSubmit.disabled = false;
+      wishSubmit.textContent = 'Kirim Ucapan ↗';
+    }
   });
 }
+
+/* MEMUAT UCAPAN SAAT HALAMAN DIBUKA */
+loadWishes();
+
+/* MEMPERBARUI DAFTAR SETIAP 30 DETIK */
+setInterval(loadWishes, 30000);
 
 /* BAGIKAN UNDANGAN */
 const shareBtn = document.getElementById('shareBtn');
