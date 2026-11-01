@@ -21,7 +21,7 @@ function hideLoading() {
 
 window.addEventListener('load', hideLoading);
 /* KUNCI HALAMAN COVER */
-let coverUnlocked = false;
+let coverUnlocked = sessionStorage.getItem('weddingUnlocked') === 'true';
 
 // Mencegah scroll mouse dan trackpad
 document.addEventListener('wheel', (event) => {
@@ -61,9 +61,10 @@ document.querySelectorAll('[data-go]').forEach((button) => {
     const target = document.getElementById(button.dataset.go);
 
     // Buka kunci ketika tombol Buka Undangan ditekan
-    if (button.dataset.go === 'intro') {
-      coverUnlocked = true;
-    }
+   if (button.dataset.go === 'intro') {
+  coverUnlocked = true;
+  sessionStorage.setItem('weddingUnlocked', 'true');
+}
 
     target?.scrollIntoView({ behavior: 'smooth' });
   });
