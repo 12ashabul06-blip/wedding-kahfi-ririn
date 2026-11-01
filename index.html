@@ -215,37 +215,66 @@
     </section>
 
     <!-- HALAMAN 7: UCAPAN -->
-    <section class="page wishes" id="rsvp" data-label="Ucapan">
-      <div class="wish-backdrop">
-        <img src="assets/demo-25-4.webp" alt="">
+<section class="page wishes" id="rsvp" data-label="Ucapan">
+  <div class="wish-backdrop">
+    <img src="assets/demo-25-4.webp" alt="">
+  </div>
+
+  <div class="wish-content">
+    <p class="eyebrow">BE PART OF OUR DAY</p>
+    <h2>Your love<br>means <em>everything.</em></h2>
+    <p>Doa dan kehadiran Anda adalah hadiah terindah bagi kami.</p>
+
+    <form id="wishForm">
+      <label for="guestName">Nama Anda</label>
+      <input
+        id="guestName"
+        name="name"
+        type="text"
+        maxlength="60"
+        placeholder="Tulis nama Anda"
+        required
+      >
+
+      <label for="attendance">Konfirmasi kehadiran</label>
+      <select id="attendance" name="attendance" required>
+        <option value="Hadir">InsyaAllah hadir</option>
+        <option value="Tidak hadir">Mohon maaf, belum bisa hadir</option>
+      </select>
+
+      <label for="message">Ucapan & doa</label>
+      <textarea
+        id="message"
+        name="message"
+        rows="2"
+        maxlength="500"
+        placeholder="Tuliskan doa terbaik Anda..."
+        required
+      ></textarea>
+
+      <button class="submit-btn" type="submit" id="wishSubmit">
+        Kirim Ucapan ↗
+      </button>
+    </form>
+
+    <small class="form-note" id="wishStatus">
+      Ucapan Anda akan ditampilkan di halaman ini.
+    </small>
+
+    <div class="wish-comments">
+      <div class="comments-heading">
+        <span>UCAPAN & DOA</span>
+        <span id="wishCount">0 ucapan</span>
       </div>
 
-      <div class="wish-content">
-        <p class="eyebrow">BE PART OF OUR DAY</p>
-        <h2>Your love<br>means <em>everything.</em></h2>
-        <p>Doa dan kehadiran Anda adalah hadiah terindah bagi kami.</p>
-
-        <form id="wishForm">
-          <label for="guestName">Nama Anda</label>
-          <input id="guestName" name="name" placeholder="Tulis nama Anda" required>
-
-          <label for="attendance">Konfirmasi kehadiran</label>
-          <select id="attendance" name="attendance">
-            <option value="Hadir">InsyaAllah hadir</option>
-            <option value="Tidak hadir">Mohon maaf, belum bisa hadir</option>
-          </select>
-
-          <label for="message">Ucapan & doa</label>
-          <textarea id="message" name="message" rows="3" placeholder="Tuliskan doa terbaik Anda..." required></textarea>
-
-          <button class="submit-btn" type="submit">Kirim Ucapan via WhatsApp ↗</button>
-        </form>
-
-        <small class="form-note">Pesan akan disiapkan untuk dikirim melalui WhatsApp.</small>
+      <div class="comments-list" id="wishList">
+        <p class="comments-empty">Memuat ucapan...</p>
       </div>
+    </div>
+  </div>
 
-      <div class="section-index">07 <span>/ 09</span></div>
-    </section>
+  <div class="section-index">07 <span>/ 09</span></div>
+</section>
 
     <!-- HALAMAN 8: HADIAH -->
     <section class="page gift-page" id="gift" data-label="Hadiah">
