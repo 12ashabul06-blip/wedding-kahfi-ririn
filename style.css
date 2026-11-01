@@ -271,36 +271,184 @@ h2 em{font-weight:400;color:var(--gold2)}
 
 /* WISHES / RSVP — HALAMAN 7 */
 .wishes{
-  background:rgba(20,34,56,.35);color:white;
-  display:grid;grid-template-columns:48% 52%;align-items:stretch
+  background:rgba(20,34,56,.35);
+  color:white;
+  display:grid;
+  grid-template-columns:48% 52%;
+  align-items:stretch
 }
-.wish-backdrop{position:relative;min-height:100vh;overflow:hidden}
-.wish-backdrop:after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(20,34,56,.5)),rgba(20,34,56,.22)
-}
-.wish-backdrop img{filter:grayscale(0%);opacity:.75}
-.wish-content{align-self:center;padding:12vh 12% 9vh}
-.wish-content h2{color:#f2eee7;font-size:clamp(52px,6vw,80px)}
-.wish-content>p:not(.eyebrow){
-  font-size:12px;line-height:1.8;color:#f0d89d;margin-bottom:28px
-}
-.wish-content form{display:flex;flex-direction:column}
-.wish-content label{font-size:9px;letter-spacing:1px;color:var(--gold);margin:12px 0 8px}
-.wish-content input,.wish-content select,.wish-content textarea{
-  background:rgba(20,34,56,.15);border:0;border-bottom:1px solid #fff;
-  padding:11px 2px;color:#fff;font:300 12px var(--sans);
-  outline:none;border-radius:0
-}
-.wish-content select option{color:var(--ink);background:#fff}
-.wish-content textarea{resize:vertical}
-.wish-content input::placeholder,.wish-content textarea::placeholder{color:#fff}
-.submit-btn{
-  margin-top:22px;justify-content:center;background:var(--gold);
-  color:var(--navy);font-weight:500
-}
-.form-note{display:block;color:#fff;font-size:9px;margin-top:13px}
 
+.wish-backdrop{
+  position:relative;
+  min-height:100vh;
+  overflow:hidden
+}
+
+.wish-backdrop:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,transparent,rgba(20,34,56,.5)),
+    rgba(20,34,56,.22)
+}
+
+.wish-backdrop img{
+  filter:grayscale(0%);
+  opacity:.75
+}
+
+.wish-content{
+  align-self:center;
+  padding:7vh 10% 7vh;
+  min-width:0
+}
+
+.wish-content h2{
+  color:#f2eee7;
+  font-size:clamp(42px,5vw,68px);
+  margin-bottom:12px
+}
+
+.wish-content>p:not(.eyebrow){
+  font-size:12px;
+  line-height:1.8;
+  color:#f0d89d;
+  margin-bottom:16px
+}
+
+.wish-content form{
+  display:flex;
+  flex-direction:column
+}
+
+.wish-content label{
+  font-size:9px;
+  letter-spacing:1px;
+  color:var(--gold);
+  margin:9px 0 6px
+}
+
+.wish-content input,
+.wish-content select,
+.wish-content textarea{
+  width:100%;
+  box-sizing:border-box;
+  background:rgba(20,34,56,.15);
+  border:0;
+  border-bottom:1px solid #fff;
+  padding:9px 2px;
+  color:#fff;
+  font:300 12px var(--sans);
+  outline:none;
+  border-radius:0
+}
+
+.wish-content select option{
+  color:var(--ink);
+  background:#fff
+}
+
+.wish-content textarea{
+  resize:vertical;
+  min-height:48px
+}
+
+.wish-content input::placeholder,
+.wish-content textarea::placeholder{
+  color:#fff
+}
+
+.submit-btn{
+  margin-top:16px;
+  justify-content:center;
+  background:var(--gold);
+  color:var(--navy);
+  font-weight:500
+}
+
+.form-note{
+  display:block;
+  color:#fff;
+  font-size:9px;
+  line-height:1.6;
+  margin-top:9px
+}
+
+/* DAFTAR KOMENTAR */
+.wish-comments{
+  margin-top:20px;
+  border-top:1px solid rgba(240,216,157,.55);
+  padding-top:12px
+}
+
+.comments-heading{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  color:var(--gold);
+  font-size:9px;
+  letter-spacing:1.5px;
+  margin-bottom:10px
+}
+
+#wishCount{
+  color:#fff;
+  font-size:8px;
+  letter-spacing:.5px
+}
+
+.comments-list{
+  height:145px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  padding-right:8px
+}
+
+.comments-list::-webkit-scrollbar{
+  width:4px
+}
+
+.comments-list::-webkit-scrollbar-thumb{
+  background:var(--gold);
+  border-radius:5px
+}
+
+.comments-list::-webkit-scrollbar-track{
+  background:rgba(255,255,255,.12)
+}
+
+.wish-comment{
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.2)
+}
+
+.wish-comment-name{
+  color:#f0d89d;
+  font:400 16px var(--serif);
+  margin:0 0 4px
+}
+
+.wish-comment-message{
+  color:#fff;
+  font-size:10px;
+  line-height:1.7;
+  margin:0;
+  overflow-wrap:anywhere
+}
+
+.wish-comment-meta{
+  color:rgba(255,255,255,.65);
+  font-size:8px;
+  margin-top:5px
+}
+
+.comments-empty{
+  color:#fff;
+  font-size:10px;
+  line-height:1.7
+}
 /* GIFT — HALAMAN 8 DALAM URUTAN SECTION */
 .gift-page{
   min-height:100svh;padding:105px 22px 85px;
