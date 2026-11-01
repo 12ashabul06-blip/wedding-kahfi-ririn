@@ -188,16 +188,16 @@ h2 em{font-weight:400;color:var(--gold2)}
 
 /* EVENTS — HALAMAN 4 */
 .events{
-  background:rgba(20,34,56,.35);color:#f1eee8;
+  background:rgba(20,34,56,.45);color:#f1eee8;
   display:grid;grid-template-columns:44% 56%;align-items:stretch
 }
 .event-image{height:100%;min-height:100vh;overflow:hidden}
-.event-image img{filter:grayscale(0%);opacity:.76}
+.event-image img{filter:grayscale(0%);opacity:.100}
 .event-panel{padding:14vh 10% 10vh 11%;align-self:center}
 .event-panel h2{color:#f0eee9;font-size:clamp(52px,6vw,82px)}
 .event-intro{color:#e0e2e5;margin-bottom:35px}
 .event-row{
-  border-top:1px solid #667184;padding:23px 0;
+  border-top:1px solid #fcfcfc;padding:23px 0;
   display:grid;grid-template-columns:32px 1fr 25px;gap:14px;align-items:start
 }
 .event-no{font-size:9px;color:var(--gold);padding-top:5px}
