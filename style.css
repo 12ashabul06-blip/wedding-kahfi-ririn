@@ -293,7 +293,7 @@ h2 em{font-weight:400;color:var(--gold2)}
 .gift-page{
   min-height:100svh;padding:105px 22px 85px;
   display:flex;align-items:center;justify-content:center;
-  background:rgba(245,243,238,.100);color:var(--ink)
+  background:#d8d9d7;color:var(--ink)
 }
 .gift-content{width:min(100%,510px);margin:0 auto;text-align:center;position:relative;z-index:2}
 .gift-content h2{
