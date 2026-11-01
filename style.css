@@ -107,11 +107,11 @@ a{color:inherit;text-decoration:none}
   color:var(--gold);
   font-weight:400;
   position:relative;
-  z-index:3;
+  z-index:5;
   display:inline-block;
-  margin-left:-.12em;
-  margin-right:-.12em;
-  transform:translateY(.12em);
+  margin-left:-.15em;
+  margin-right:-.15em;
+  transform:translate(-.05em,.48em);
 }
 .gold-rule{width:65px;height:1px;background:var(--gold);margin:26px 0}
 .cover-date{font-size:10px;letter-spacing:4px;margin:0 0 34px}
