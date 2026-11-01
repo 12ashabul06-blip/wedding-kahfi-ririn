@@ -368,3 +368,82 @@ text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
 .story h2 em {
   color: #c4a86b !important;
 }
+
+/* =========================================
+   PERBAIKAN TAMPILAN UNDANGAN KAHFI & RIRIN
+   ========================================= */
+
+/* HALAMAN 5 - STORY */
+.story .body-copy {
+  color: #e3e1dc !important;
+}
+
+.story-quote {
+  color: #f0d89d !important;
+}
+
+.story-small {
+  border-color: var(--gold) !important;
+}
+
+/* HALAMAN 7 - HADIAH */
+.gift-page {
+  background: rgba(238, 236, 231, 0.88);
+}
+
+.gift-intro {
+  color: #55585d !important;
+}
+
+.gift-thanks {
+  color: #9c7c40 !important;
+}
+
+/* HALAMAN 8 - PENUTUP */
+.closing {
+  background: var(--navy);
+}
+
+.closing-bg {
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      rgba(20, 34, 56, 0.48),
+      rgba(20, 34, 56, 0.48)
+    ),
+    url('assets/prewed-20.jpg') center / cover no-repeat;
+}
+
+.closing h2 {
+  color: #f1eee8 !important;
+}
+
+.closing .signature {
+  color: #f1eee8 !important;
+}
+
+/* PASTIKAN KONTEN PENUTUP DI ATAS BACKGROUND */
+.closing-content,
+.closing-footer,
+.closing .section-index {
+  position: relative;
+  z-index: 2;
+}
+
+/* PENYESUAIAN BAYANGAN TEKS */
+#event h1,
+#event h2,
+#event h3,
+#event p,
+#event span,
+#event strong,
+#event a {
+  text-shadow: none;
+}
+
+/* NOMOR HALAMAN */
+.section-index {
+  z-index: 3;
+}
+
