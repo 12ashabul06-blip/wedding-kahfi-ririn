@@ -20,11 +20,51 @@ function hideLoading() {
 }
 
 window.addEventListener('load', hideLoading);
+/* KUNCI HALAMAN COVER */
+let coverUnlocked = false;
 
+// Mencegah scroll mouse dan trackpad
+document.addEventListener('wheel', (event) => {
+  if (!coverUnlocked) event.preventDefault();
+}, { passive: false });
+
+// Mencegah swipe pada layar HP
+document.addEventListener('touchmove', (event) => {
+  if (!coverUnlocked) event.preventDefault();
+}, { passive: false });
+
+// Mencegah navigasi menggunakan keyboard
+document.addEventListener('keydown', (event) => {
+  const scrollKeys = [
+    'ArrowDown', 'ArrowUp',
+    'PageDown', 'PageUp',
+    'Home', 'End', ' '
+  ];
+
+  if (!coverUnlocked && scrollKeys.includes(event.key)) {
+    event.preventDefault();
+  }
+});
+
+// Mencegah menu navigasi dibuka sebelum undangan
+document.addEventListener('click', (event) => {
+  const navLink = event.target.closest('.nav-item');
+
+  if (navLink && !coverUnlocked) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+}, true);
 /* TOMBOL BUKA UNDANGAN */
 document.querySelectorAll('[data-go]').forEach((button) => {
   button.addEventListener('click', () => {
     const target = document.getElementById(button.dataset.go);
+
+    // Buka kunci ketika tombol Buka Undangan ditekan
+    if (button.dataset.go === 'intro') {
+      coverUnlocked = true;
+    }
+
     target?.scrollIntoView({ behavior: 'smooth' });
   });
 });
