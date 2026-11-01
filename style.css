@@ -312,6 +312,10 @@ h2 em{font-weight:400;color:var(--gold2)}
   font:400 clamp(48px,8vw,76px)/.95 var(--serif);
   color:var(--navy);margin:0 0 18px
 }
+.gift-content h2 em{
+  color:#a88948;
+}
+
 .gift-intro{
   font-size:12px;line-height:1.9;color:#55585d;
   max-width:390px;margin:0 auto 25px
