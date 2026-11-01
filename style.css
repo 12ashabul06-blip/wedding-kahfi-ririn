@@ -46,8 +46,9 @@ body{background:transparent}
 .story h2 em {
   color: var(--gold);
 }
-.gallery{background:rgba(216,217,215,.35)}
-.gift-page{background:rgba(245,243,238,.35)}
+.events{background:rgba(20,34,56,.35)}
+.wishes{background:rgba(20,34,56,.35)}
+.closing{background:rgba(20,34,56,.35)}
 
 /* NAMA TAMU UNDANGAN */
 .guest-greeting {
