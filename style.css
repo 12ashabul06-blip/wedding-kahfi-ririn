@@ -611,11 +611,35 @@ h2 em{font-weight:400;color:var(--gold2)}
   .g-wide{grid-column:span 1}
   .gallery-grid figure:nth-child(4){grid-column:span 2}
 
-  .wishes{grid-template-columns:1fr}
-  .wish-backdrop{position:absolute;inset:0;min-height:100%;opacity:.35}
-  .wish-backdrop:after{background:rgba(20,34,56,.55)}
-  .wish-content{position:relative;padding:12vh 9vw 13vh}
-  .wish-content h2{font-size:62px}
+  .wishes{
+  grid-template-columns:1fr;
+}
+
+.wish-backdrop{
+  position:absolute;
+  inset:0;
+  min-height:100%;
+  opacity:.35;
+}
+
+.wish-backdrop:after{
+  background:rgba(20,34,56,.55);
+}
+
+.wish-content{
+  position:relative;
+  width:100%;
+  box-sizing:border-box;
+  padding:10vh 9vw 10vh;
+}
+
+.wish-content h2{
+  font-size:clamp(42px, 11vw, 62px);
+}
+
+.comments-list{
+  height:135px;
+}
 
   .gift-page{padding:95px 16px 95px}
   .gift-card{padding:22px 14px}
