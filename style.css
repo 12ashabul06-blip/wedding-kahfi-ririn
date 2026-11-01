@@ -161,7 +161,8 @@ h2 em{font-weight:400;color:var(--gold2)}
 .profile{background:#f5f5f5 ;padding:12vh 8vw 9vh}
 .section-heading{text-align:center;margin-bottom:5vh}
 .section-heading .eyebrow{margin-bottom:14px}
-.section-heading h2{font-size:clamp(42px,5vw,66px);margin:0}
+.section-heading h2{font-size:clamp(42px,5vw,66px);margin:0;color:#142238}
+.section-heading h2 em{color:var(--gold)}
 .couple-grid{
   max-width:1050px;margin:auto;display:grid;
   grid-template-columns:1fr 1fr;align-items:center;gap:12px
@@ -174,14 +175,14 @@ h2 em{font-weight:400;color:var(--gold2)}
   position:relative;width:86%;margin:-45px auto 0;
   background:rgba(245,243,238,.94);padding:25px 27px 23px;z-index:2
 }
-.person-index{font-size:8px;letter-spacing:2px;color:var(--gold)}
+.person-index{font-size:8px;letter-spacing:2px;color:var(--navy)}
 .person-card h3{font:400 43px/.82 var(--serif);margin:17px 0;color:var(--navy)}
 .person-card h3 em{color:var(--gold);font-weight:400}
-.person-card p{font-size:10px;color:var(--muted);margin:7px 0}
+.person-card p{font-size:10px;color:var(--ink);margin:7px 0}
 .person-card .parents{font-size:11px;line-height:1.6;color:var(--ink)}
 .social{
-  display:inline-block;margin-top:12px;font-size:9px;letter-spacing:1px;
-  border-bottom:1px solid var(--gold);padding-bottom:5px
+  display:inline-block;margin-top:12px;font-size:10px;letter-spacing:1px;
+  border-bottom:2px solid var(--gold);padding-bottom:5px
 }
 .ampersand{font:italic 52px var(--serif);color:var(--gold);text-align:center}
 
