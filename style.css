@@ -414,14 +414,14 @@ h2 em{font-weight:400;color:var(--gold2)}
 
   .profile{padding:11vh 5vw 13vh}
   .section-heading{margin-bottom:4vh}
-  .couple-grid{grid-template-columns:1fr 24px 1fr;gap:2px}
+  .couple-grid{grid-template-columns:1fr 1fr;gap:2px}
   .person-image{height:29vh;min-height:190px}
   .person-card{width:94%;margin-top:-25px;padding:18px 12px}
-  .person-card h3{font-size:31px}
+  .person-card h3{font-size:28px}
   .person-card p{font-size:8px}
   .person-card .parents{font-size:9px}
-  .person-index{font-size:6px;letter-spacing:1px}
-  .social{font-size:7px;letter-spacing:0}
+  .person-index{font-size:8px;letter-spacing:1px}
+  .social{font-size:10px;letter-spacing:0}
   .ampersand{font-size:30px}
 
   .events{grid-template-columns:1fr}
