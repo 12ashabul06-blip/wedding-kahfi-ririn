@@ -348,7 +348,7 @@ h2 em{font-weight:400;color:var(--gold2)}
 }
 .closing-content .gold-rule{margin:30px auto}
 .closing-date{
-  font-size:12px!important;letter-spacing:3px;color:var(--gold)!important
+  font-size:20px!important;letter-spacing:3px;color:var(--white)!important
 }
 .signature.large{font-size:47px;margin-top:20px;color:#f1eee8}
 .closing-content .thankyou{font-size:10px;margin-top:28px}
