@@ -390,3 +390,9 @@ const introGuest = document.getElementById('inviteGuestNameIntro');
 
 if (coverGuest) coverGuest.textContent = guestName;
 if (introGuest) introGuest.textContent = guestName;
+/* NAMA TAMU OTOMATIS DI FORM UCAPAN */
+const wishGuestName = document.getElementById('guestName');
+
+if (wishGuestName) {
+  wishGuestName.value = guestName === 'Tamu Undangan' ? '' : guestName;
+}
