@@ -381,34 +381,6 @@ loadWishes();
 /* MEMPERBARUI DAFTAR SETIAP 30 DETIK */
 setInterval(loadWishes, 30000);
 
-/* BAGIKAN UNDANGAN */
-const shareBtn = document.getElementById('shareBtn');
-
-if (shareBtn) {
-  shareBtn.addEventListener('click', async () => {
-    const shareData = {
-      title: 'Undangan Kahfi & Ririn',
-      text: 'Dengan bahagia, kami mengundang Anda ke pernikahan Kahfi & Ririn.',
-      url: window.location.href
-    };
-
-    if (navigator.share) {
-      try {
-        await navigator.share(shareData);
-      } catch (error) {
-        /* Pengguna membatalkan menu bagikan. */
-      }
-    } else {
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        alert('Tautan undangan disalin.');
-      } catch (error) {
-        window.prompt('Salin tautan undangan ini:', window.location.href);
-      }
-    }
-  });
-}
-
 /* NAMA TAMU OTOMATIS DARI PARAMETER ?to= */
 const guestParams = new URLSearchParams(window.location.search);
 const guestName = guestParams.get('to')?.trim() || 'Tamu Undangan';
