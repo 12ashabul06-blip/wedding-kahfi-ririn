@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#142238">
+<title>Generator Undangan — Kahfi & Ririn</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #142238;
+  color: #eeece7;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+}
+
+.generator {
+  width: 100%;
+  max-width: 440px;
+  background: #eeece7;
+  color: #142238;
+  padding: 35px 25px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+.monogram {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  color: #142238;
+  font-weight: 600;
+}
+
+.monogram span {
+  color: #c4a86b;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  margin: 5px 0 28px;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 35px;
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+.description {
+  font-size: 13px;
+  color: #6c7076;
+  line-height: 1.7;
+  margin-bottom: 27px;
+}
+
+label {
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  margin-bottom: 9px;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #c9c6be;
+  background: white;
+  border-radius: 7px;
+  font-size: 15px;
+  outline: none;
+  color: #142238;
+}
+
+input:focus {
+  border-color: #c4a86b;
+}
+
+.result {
+  margin-top: 22px;
+  padding: 16px;
+  background: #e2e0da;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.result small {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #777;
+}
+
+#inviteLink {
+  display: block;
+  margin: 12px 0;
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+  color: #142238;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 7px;
+  background: #142238;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.footer {
+  margin-top: 25px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="generator">
+
+  <div class="monogram">K<span>&</span>R</div>
+  <p class="eyebrow">THE WEDDING OF</p>
+
+  <h1>Generator Undangan</h1>
+
+  <p class="description">
+    Masukkan nama tamu untuk membuat link undangan
+    pribadi Kahfi & Ririn.
+  </p>
+
+  <label for="guestName">NAMA TAMU UNDANGAN</label>
+
+  <input
+    type="text"
+    id="guestName"
+    placeholder="Contoh: Andi Saputra"
+    autocomplete="off"
+  >
+
+  <div class="result">
+    <small>LINK UNDANGAN</small>
+    <span id="inviteLink">Link akan muncul di sini.</span>
+
+    <button id="copyBtn" disabled>
+      COPY LINK
+    </button>
+  </div>
+
+  <div class="footer">
+    KAHFI & RIRIN · 2026
+  </div>
+
+</div>
+
+<script>
+const guestInput = document.getElementById('guestName');
+const inviteLink = document.getElementById('inviteLink');
+const copyBtn = document.getElementById('copyBtn');
+
+const invitationURL =
+  'https://12ashabul06-blip.github.io/wedding-kahfi-ririn/';
+
+function generateLink() {
+  const name = guestInput.value.trim();
+
+  if (!name) {
+    inviteLink.textContent = 'Link akan muncul di sini.';
+    copyBtn.disabled = true;
+    copyBtn.textContent = 'COPY LINK';
+    return;
+  }
+
+  const link = invitationURL + '?to=' + encodeURIComponent(name);
+
+  inviteLink.textContent = link;
+  copyBtn.disabled = false;
+  copyBtn.textContent = 'COPY LINK';
+}
+
+guestInput.addEventListener('input', generateLink);
+
+copyBtn.addEventListener('click', async () => {
+  const name = guestInput.value.trim();
+  if (!name) return;
+
+  const link = invitationURL + '?to=' + encodeURIComponent(name);
+
+  try {
+    await navigator.clipboard.writeText(link);
+    copyBtn.textContent = 'BERHASIL DISALIN ✓';
+  } catch (error) {
+    window.prompt('Salin link undangan:', link);
+  }
+});
+</script>
+
+</body>
+</html>
