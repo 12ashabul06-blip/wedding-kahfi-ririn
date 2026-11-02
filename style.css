@@ -88,8 +88,7 @@ a{color:inherit;text-decoration:none}
 .cover-photo{
   background-image:var(--photo);background-size:cover;background-position:center 40%;
   filter:grayscale(100%);transform:scale(1.04);
-  animation:slowzoom 18s ease-in-out infinite alternate
-}
+  }
 .cover-shade{
   background:
     linear-gradient(90deg,rgba(13,23,39,.72),rgba(13,23,39,.12) 75%),
@@ -222,6 +221,11 @@ h2 em{font-weight:400;color:var(--gold2)}
 }
 .venue-note strong{font-size:11px;letter-spacing:.3px;color:#e3e1dc;font-weight:400}
 .outline-btn{margin-top:12px}
+
+.map-icon{
+  margin-left:8px;
+  font-size:14px;
+}
 .events .section-index{color:var(--gold)}
 
 /* STORY — HALAMAN 5 */
@@ -554,7 +558,7 @@ h2 em{font-weight:400;color:var(--gold2)}
 }
 .closing h2{
   font-size:clamp(60px,8vw,100px);margin-bottom:25px;
-  color:#f1eee8
+  color:#fcd386
 }
 .closing h2 em{color:var(--gold)}
 .closing-content>p:not(.eyebrow){
@@ -563,7 +567,7 @@ h2 em{font-weight:400;color:var(--gold2)}
 }
 .closing-content .gold-rule{margin:30px auto}
 .closing-date{
-  font-size:20px!important;letter-spacing:3px;color:var(--white)!important
+  font-size:15px!important;letter-spacing:3px;color:var(--gold2)!important
 }
 .signature.large{font-size:47px;margin-top:20px;color:#f1eee8}
 .closing-content .thankyou{font-size:10px;margin-top:28px}
