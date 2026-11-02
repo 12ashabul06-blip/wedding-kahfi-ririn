@@ -393,6 +393,6 @@ if (introGuest) introGuest.textContent = guestName;
 /* NAMA TAMU OTOMATIS DI FORM UCAPAN */
 const wishGuestName = document.getElementById('guestName');
 
-if (wishGuestName) {
-  wishGuestName.value = guestName === 'Tamu Undangan' ? '' : guestName;
+if (wishGuestName && guestName !== 'Tamu Undangan') {
+  wishGuestName.value = guestName;
 }
