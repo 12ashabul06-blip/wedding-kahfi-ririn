@@ -21,16 +21,18 @@ function hideLoading() {
 
 window.addEventListener('load', hideLoading);
 /* KUNCI HALAMAN COVER */
-let coverUnlocked = sessionStorage.getItem('weddingUnlocked') === 'true';
+function isCoverUnlocked() {
+  return sessionStorage.getItem('weddingUnlocked') === 'true';
+}
 
 // Mencegah scroll mouse dan trackpad
 document.addEventListener('wheel', (event) => {
-  if (!coverUnlocked) event.preventDefault();
+  if (!isCoverUnlocked()) event.preventDefault();
 }, { passive: false });
 
 // Mencegah swipe pada layar HP
 document.addEventListener('touchmove', (event) => {
-  if (!coverUnlocked) event.preventDefault();
+  if (!isCoverUnlocked()) event.preventDefault();
 }, { passive: false });
 
 // Mencegah navigasi menggunakan keyboard
@@ -41,7 +43,7 @@ document.addEventListener('keydown', (event) => {
     'Home', 'End', ' '
   ];
 
-  if (!coverUnlocked && scrollKeys.includes(event.key)) {
+  if (!isCoverUnlocked() && scrollKeys.includes(event.key)) {
     event.preventDefault();
   }
 });
@@ -50,7 +52,7 @@ document.addEventListener('keydown', (event) => {
 document.addEventListener('click', (event) => {
   const navLink = event.target.closest('.nav-item');
 
-  if (navLink && !coverUnlocked) {
+  if (navLink && !isCoverUnlocked()) {
     event.preventDefault();
     event.stopPropagation();
   }
@@ -62,9 +64,8 @@ document.querySelectorAll('[data-go]').forEach((button) => {
 
     // Buka kunci ketika tombol Buka Undangan ditekan
    if (button.dataset.go === 'intro') {
-  coverUnlocked = true;
   sessionStorage.setItem('weddingUnlocked', 'true');
-}
+   }
 
     target?.scrollIntoView({ behavior: 'smooth' });
   });
