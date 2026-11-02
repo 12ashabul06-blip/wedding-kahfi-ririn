@@ -326,7 +326,7 @@ h2 em{font-weight:400;color:var(--gold2)}
 
 /* WISHES / RSVP — HALAMAN 7 */
 .wishes{
-  background:rgba(20,34,56,.35);
+  background:rgba(20,34,56,.55);
   color:white;
   display:grid;
   grid-template-columns:48% 52%;
