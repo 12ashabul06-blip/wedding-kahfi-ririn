@@ -8,9 +8,38 @@ const loading = document.getElementById('loading');
 const loadingStart = Date.now();
 const minimumLoadingTime = 3000;
 
-function hideLoading() {
-  if (!loading) return;
+function waitForSlideshowImage() {
+  const image = document.getElementById('slideshowImage1');
 
+  if (!image || !image.src || image.complete) {
+    return Promise.resolve();
+  }
+
+  return new Promise((resolve) => {
+    const finish = () => {
+      image.removeEventListener('load', finish);
+      image.removeEventListener('error', finish);
+      clearTimeout(fallback);
+      resolve();
+    };
+
+    image.addEventListener('load', finish);
+    image.addEventListener('error', finish);
+
+    // Pengaman jika koneksi sangat lambat
+    const fallback = window.setTimeout(finish, 20000);
+
+    if (image.complete) finish();
+  });
+}
+
+async function hideLoading() {
+  if (!loading || loading.classList.contains('done')) return;
+
+  // Tunggu foto pertama slideshow siap
+  await waitForSlideshowImage();
+
+  // Pastikan minimal 3 detik
   const elapsed = Date.now() - loadingStart;
   const remaining = Math.max(0, minimumLoadingTime - elapsed);
 
