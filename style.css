@@ -369,9 +369,29 @@ h2 em{font-weight:400;color:var(--gold2)}
   width: 100%;
   overflow: hidden;
   border-radius: 15px;
-  aspect-ratio: 0.78 / 1;
+  aspect-ratio: .78 / 1;
+  opacity: 0;
+  transform: translateX(100px);
+  transition:
+    opacity 1s ease,
+    transform 1.2s cubic-bezier(.22, 1, .36, 1);
 }
 
+
+/* FOTO STORY MASUK DARI SAMPING */
+.story-row:not(.story-row-reverse) .story-photo {
+  transform: translateX(100px);
+}
+
+.story-row-reverse .story-photo {
+  transform: translateX(-100px);
+}
+
+/* SAAT FOTO MULAI TERLIHAT */
+.story-row.in-view .story-photo {
+  opacity: 1;
+  transform: translateX(0);
+}
 .story-photo img {
   display: block;
   width: 100%;
