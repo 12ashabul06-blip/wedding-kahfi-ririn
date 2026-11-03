@@ -6,42 +6,53 @@
 /* LOADING SCREEN */
 const loading = document.getElementById('loading');
 const loadingStart = Date.now();
+
 const minimumLoadingTime = 3000;
+const maximumLoadingTime = 10000;
 
-function waitForSlideshowImage() {
-  const image = document.getElementById('slideshowImage1');
-
-  if (!image || !image.src || image.complete) {
+function waitForImage(img) {
+  if (img.complete) {
     return Promise.resolve();
   }
 
-  return new Promise((resolve) => {
-    const finish = () => {
-      image.removeEventListener('load', finish);
-      image.removeEventListener('error', finish);
-      clearTimeout(fallback);
-      resolve();
-    };
-
-    image.addEventListener('load', finish);
-    image.addEventListener('error', finish);
-
-    // Pengaman jika koneksi sangat lambat
-    const fallback = window.setTimeout(finish, 20000);
-
-    if (image.complete) finish();
+  return new Promise(resolve => {
+    img.addEventListener('load', resolve, { once: true });
+    img.addEventListener('error', resolve, { once: true });
   });
 }
 
 async function hideLoading() {
   if (!loading || loading.classList.contains('done')) return;
 
-  // Tunggu foto pertama slideshow siap
-  await waitForSlideshowImage();
+  const mainImages = [
+    ...document.querySelectorAll(
+      '#cover img, #couple img, #event img, #story img'
+    ),
+    document.getElementById('slideshowImage1')
+  ].filter(Boolean);
 
-  // Pastikan minimal 3 detik
+  const imageLoading = Promise.all(
+    mainImages.map(waitForImage)
+  );
+
   const elapsed = Date.now() - loadingStart;
-  const remaining = Math.max(0, minimumLoadingTime - elapsed);
+  const remainingMinimum = Math.max(
+    0,
+    minimumLoadingTime - elapsed
+  );
+
+  await Promise.race([
+    imageLoading,
+    new Promise(resolve =>
+      window.setTimeout(resolve, maximumLoadingTime)
+    )
+  ]);
+
+  const elapsedAfterLoading = Date.now() - loadingStart;
+  const remaining = Math.max(
+    0,
+    minimumLoadingTime - elapsedAfterLoading
+  );
 
   window.setTimeout(() => {
     loading.classList.add('done');
