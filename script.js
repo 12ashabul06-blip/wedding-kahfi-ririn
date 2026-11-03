@@ -417,7 +417,7 @@ if (wishGuestName && guestName !== 'Tamu Undangan') {
     'assets/prewed-26.webp',
     'assets/prewed-28.webp',
     'assets/prewed-29.webp',
-    'assets/prewed-30.webp'
+    'assets/prewed-30.webp',
     'assets/PREWED 3.webp'
   ];
 
