@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#142238">
+
 <title>Generator Undangan — Kahfi & Ririn</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -100,6 +100,7 @@ input:focus {
 }
 
 .result small {
+  display: block;
   font-size: 10px;
   letter-spacing: 2px;
   color: #777;
@@ -114,17 +115,28 @@ input:focus {
   color: #142238;
 }
 
+#inviteMessage {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.8;
+  margin: 12px 0;
+  color: #142238;
+}
+
 button {
   width: 100%;
-  padding: 15px;
+  padding: 15px 10px;
   border: none;
   border-radius: 7px;
   background: #142238;
   color: white;
-  font-size: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   cursor: pointer;
+  transition: .2s;
 }
 
 button:active {
@@ -149,14 +161,15 @@ button:disabled {
 
 <div class="generator">
 
-  <div class="monogram">K<span>&</span>R</div>
+  <div class="monogram">K<span>&amp;</span>R</div>
+
   <p class="eyebrow">THE WEDDING OF</p>
 
   <h1>Generator Undangan</h1>
 
   <p class="description">
-    Masukkan nama tamu untuk membuat link undangan
-    pribadi Kahfi & Ririn.
+    Masukkan nama tamu untuk membuat link dan pesan
+    undangan pribadi Kahfi &amp; Ririn.
   </p>
 
   <label for="guestName">NAMA TAMU UNDANGAN</label>
@@ -164,21 +177,36 @@ button:disabled {
   <input
     type="text"
     id="guestName"
-    placeholder="Contoh: Andi Saputra"
+    placeholder="Contoh: Asmaul Husna"
     autocomplete="off"
   >
 
   <div class="result">
+
     <small>LINK UNDANGAN</small>
+
     <span id="inviteLink">Link akan muncul di sini.</span>
 
     <button id="copyBtn" disabled>
       COPY LINK
     </button>
+
+  </div>
+
+  <div class="result">
+
+    <small>PESAN UNDANGAN LENGKAP</small>
+
+    <div id="inviteMessage">Pesan undangan akan muncul di sini.</div>
+
+    <button id="copyMessageBtn" disabled>
+      SALIN PESAN UNDANGAN
+    </button>
+
   </div>
 
   <div class="footer">
-    KAHFI & RIRIN · 2026
+    KAHFI &amp; RIRIN · 2026
   </div>
 
 </div>
@@ -187,40 +215,108 @@ button:disabled {
 const guestInput = document.getElementById('guestName');
 const inviteLink = document.getElementById('inviteLink');
 const copyBtn = document.getElementById('copyBtn');
+const inviteMessage = document.getElementById('inviteMessage');
+const copyMessageBtn = document.getElementById('copyMessageBtn');
 
 const invitationURL =
   'https://12ashabul06-blip.github.io/wedding-kahfi-ririn/';
 
-function generateLink() {
+function generateInvitation() {
   const name = guestInput.value.trim();
 
   if (!name) {
     inviteLink.textContent = 'Link akan muncul di sini.';
+    inviteMessage.textContent = 'Pesan undangan akan muncul di sini.';
+
     copyBtn.disabled = true;
+    copyMessageBtn.disabled = true;
+
     copyBtn.textContent = 'COPY LINK';
+    copyMessageBtn.textContent = 'SALIN PESAN UNDANGAN';
+
     return;
   }
 
   const link = invitationURL + '?to=' + encodeURIComponent(name);
 
+  const message =
+`Kepada Yth. Bapak/Ibu/Saudara/i ${name}
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Anda untuk menghadiri momen istimewa kebahagiaan kami.
+
+Detail lengkap mengenai waktu, lokasi, dan galeri acara dapat diakses melalui tautan undangan digital berikut:
+
+${link}
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir untuk memberikan doa restu bagi kedua mempelai.
+
+Terima kasih banyak atas perhatian dan pengertiannya.`;
+
   inviteLink.textContent = link;
+  inviteMessage.textContent = message;
+
   copyBtn.disabled = false;
+  copyMessageBtn.disabled = false;
+
   copyBtn.textContent = 'COPY LINK';
+  copyMessageBtn.textContent = 'SALIN PESAN UNDANGAN';
 }
 
-guestInput.addEventListener('input', generateLink);
+guestInput.addEventListener('input', generateInvitation);
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  const textarea = document.createElement('textarea');
+
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.left = '-9999px';
+  textarea.style.top = '0';
+
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+
+  const success = document.execCommand('copy');
+
+  textarea.remove();
+
+  if (!success) {
+    throw new Error('Penyalinan gagal');
+  }
+
+  return true;
+}
 
 copyBtn.addEventListener('click', async () => {
   const name = guestInput.value.trim();
+
   if (!name) return;
 
   const link = invitationURL + '?to=' + encodeURIComponent(name);
 
   try {
-    await navigator.clipboard.writeText(link);
-    copyBtn.textContent = 'BERHASIL DISALIN ✓';
+    await copyText(link);
+    copyBtn.textContent = 'LINK BERHASIL DISALIN ✓';
   } catch (error) {
-    window.prompt('Salin link undangan:', link);
+    window.prompt('Salin link undangan berikut:', link);
+  }
+});
+
+copyMessageBtn.addEventListener('click', async () => {
+  const message = inviteMessage.textContent;
+
+  if (!guestInput.value.trim()) return;
+
+  try {
+    await copyText(message);
+    copyMessageBtn.textContent = 'PESAN BERHASIL DISALIN ✓';
+  } catch (error) {
+    window.prompt('Salin seluruh pesan undangan berikut:', message);
   }
 });
 </script>
