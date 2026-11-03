@@ -228,32 +228,145 @@ h2 em{font-weight:400;color:var(--gold2)}
 }
 .events .section-index{color:var(--gold)}
 
-/* STORY — HALAMAN 5 */
-.story{
-  background:#142238!important;color:#f1eee8;
-  padding:13vh 10vw 10vh;display:grid;
-  grid-template-columns:40% 60%;align-items:center
+/* =====================================================
+   STORY — HALAMAN 5
+   ===================================================== */
+
+.story {
+  background: #142238;
+  color: #eeece7;
+  padding: 150px 8vw 100px;
+  min-height: 100vh;
+  position: relative;
 }
-.story-head{padding-right:4vw}
-.story h2{font-size:clamp(55px,7vw,92px);color:#f0eee9}
-.story h2 em{color:var(--gold)!important}
-.story .body-copy{color:#e3e1dc}
-.story-gallery{position:relative;height:72vh;min-height:500px}
-.story-gallery figure{position:absolute;margin:0}
-.story-gallery img{filter:grayscale(0%)}
-.story-large{left:0;top:0;width:68%;height:75%}
-.story-small{
-  right:0;bottom:0;width:45%;height:45%;
-  border:8px solid var(--navy)
+
+.story-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
 }
-.story-gallery figcaption{
-  position:absolute;bottom:12px;left:12px;font-size:8px;
-  letter-spacing:3px;color:white;text-shadow:0 1px 4px #222
+
+/* JUDUL STORY */
+
+.story-heading {
+  margin-bottom: 45px;
 }
-.story-quote{
-  position:absolute;right:0;top:14%;font:italic 24px/1.05 var(--serif);
-  color:#f0d89d;writing-mode:vertical-rl;
-  transform:rotate(180deg);letter-spacing:1px
+
+.story-eyebrow {
+  color: #c4a86b;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  margin-bottom: 55px;
+}
+
+.story-heading h2 {
+  font-family: var(--serif);
+  font-size: clamp(55px, 10vw, 100px);
+  line-height: .85;
+  font-weight: 500;
+  color: #eeece7;
+  margin: 0;
+}
+
+.story-heading h2 em {
+  display: block;
+  color: #c4a86b;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+/* GARIS EMAS */
+
+.story-divider {
+  display: flex;
+  align-items: center;
+  width: 42%;
+  margin: 45px auto 55px;
+}
+
+.story-divider::before,
+.story-divider::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background: #c4a86b;
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+.story-divider span {
+  height: 3px;
+  background: #c4a86b;
+  flex: 1;
+}
+
+/* BARIS CERITA */
+
+.story-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.story-text {
+  font-family: var(--serif);
+  font-size: clamp(15px, 2vw, 22px);
+  line-height: 1.42;
+  color: #eeece7;
+  text-align: left;
+}
+
+.story-text p {
+  margin: 0 0 28px;
+}
+
+.story-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* FOTO STORY */
+
+.story-photo {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+  aspect-ratio: 0.78 / 1;
+}
+
+.story-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(0%);
+}
+
+/* BARIS KEDUA */
+
+.story-row-reverse {
+  margin-top: 30px;
+}
+
+/* KALIMAT PENUTUP */
+
+.story-quote {
+  font-family: var(--serif);
+  font-size: clamp(17px, 2.5vw, 25px);
+  line-height: 1.5;
+  text-align: center;
+  color: #eeece7;
+  margin: 30px auto 0;
+  max-width: 850px;
+}
+
+.story-quote em {
+  color: #c4a86b;
+  font-style: italic;
 }
 
 /* GALLERY — HALAMAN 6 */
@@ -649,12 +762,55 @@ h2 em{font-weight:400;color:var(--gold2)}
   .event-panel{padding:7vh 8vw 13vh}
   .event-panel h2{font-size:60px}
   .event-row h3{font-size:24px}
+.story {
+  padding: 130px 7vw 80px;
+}
 
-  .story{grid-template-columns:1fr;padding:12vh 7vw 13vh;align-content:center}
-  .story-head{padding:0 0 25px}
-  .story h2{font-size:64px}
-  .story-gallery{height:48vh;min-height:350px}
-  .story-quote{font-size:18px}
+.story-heading {
+  margin-bottom: 35px;
+}
+
+.story-eyebrow {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  margin-bottom: 45px;
+}
+
+.story-heading h2 {
+  font-size: clamp(48px, 12vw, 70px);
+}
+
+.story-divider {
+  width: 65%;
+  margin: 38px auto 45px;
+}
+
+.story-row {
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 25px;
+  align-items: center;
+}
+
+.story-text {
+  font-size: clamp(12px, 3.4vw, 16px);
+  line-height: 1.4;
+}
+
+.story-text p {
+  margin-bottom: 22px;
+}
+
+.story-photo {
+  border-radius: 12px;
+  aspect-ratio: 0.78 / 1;
+}
+
+.story-quote {
+  font-size: clamp(15px, 4vw, 19px);
+  line-height: 1.45;
+  margin-top: 25px;
+}
 
   .gallery{padding:12vh 5vw 13vh}
 
