@@ -425,18 +425,13 @@ const wishGuestName = document.getElementById('guestName');
 if (wishGuestName && guestName !== 'Tamu Undangan') {
   wishGuestName.value = guestName;
 }
-/* =====================================================
-   GLOBAL BACKGROUND SLIDESHOW
-   ===================================================== */
-
+/* GLOBAL BACKGROUND SLIDESHOW */
 (function () {
-
   const imageOne = document.getElementById('slideshowImage1');
   const imageTwo = document.getElementById('slideshowImage2');
 
   if (!imageOne || !imageTwo) return;
 
-  // DAFTAR FOTO BACKGROUND
   const slideshowPhotos = [
     'assets/prewed-01.webp',
     'assets/prewed-06.webp',
@@ -452,54 +447,59 @@ if (wishGuestName && guestName !== 'Tamu Undangan') {
 
   let currentIndex = 0;
   let showingFirst = true;
+  let slideshowStarted = false;
 
-  // FOTO PERTAMA
-  imageOne.src = slideshowPhotos[0];
-
-  // PRELOAD FOTO BERIKUTNYA
-  function preloadNext() {
-    const nextIndex = (currentIndex + 1) % slideshowPhotos.length;
-    const nextImage = new Image();
-
-    nextImage.src = slideshowPhotos[nextIndex];
+  function scheduleNext() {
+    window.setTimeout(changeSlideshow, 6500);
   }
 
-  // GANTI FOTO
   function changeSlideshow() {
-
     const nextIndex = (currentIndex + 1) % slideshowPhotos.length;
-    const nextImage = new Image();
+    const preload = new Image();
 
-    nextImage.onload = function () {
-
+    preload.onload = function () {
       const activeImage = showingFirst ? imageOne : imageTwo;
       const nextLayer = showingFirst ? imageTwo : imageOne;
 
       nextLayer.src = slideshowPhotos[nextIndex];
 
-      nextLayer.classList.add('active');
-      activeImage.classList.remove('active');
+      // Pastikan browser sempat menyiapkan gambar
+      requestAnimationFrame(() => {
+        nextLayer.classList.add('active');
+        activeImage.classList.remove('active');
+      });
 
       showingFirst = !showingFirst;
       currentIndex = nextIndex;
 
-      preloadNext();
+      scheduleNext();
     };
 
-    nextImage.src = slideshowPhotos[nextIndex];
+    preload.onerror = function () {
+      console.warn('Foto slideshow gagal dimuat:', slideshowPhotos[nextIndex]);
+      currentIndex = nextIndex;
+      window.setTimeout(changeSlideshow, 700);
+    };
+
+    preload.src = slideshowPhotos[nextIndex];
   }
 
-  // MULAI SETELAH FOTO PERTAMA SIAP
-  imageOne.onload = function () {
-    imageOne.classList.add('active');
-    preloadNext();
+  function startSlideshow() {
+    if (slideshowStarted) return;
+    slideshowStarted = true;
 
-    setInterval(changeSlideshow, 6500);
+    imageOne.classList.add('active');
+    scheduleNext();
+  }
+
+  imageOne.onload = startSlideshow;
+  imageOne.onerror = function () {
+    console.warn('Foto pertama slideshow gagal dimuat.');
   };
 
-  // JIKA FOTO SUDAH TERSIMPAN DI CACHE
-  if (imageOne.complete && imageOne.naturalWidth > 0) {
-    imageOne.onload();
-  }
+  imageOne.src = slideshowPhotos[0];
 
+  if (imageOne.complete && imageOne.naturalWidth > 0) {
+    startSlideshow();
+  }
 })();
