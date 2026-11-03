@@ -145,6 +145,96 @@ const pageObserver = new IntersectionObserver((entries) => {
 
 sections.forEach((section) => pageObserver.observe(section));
 
+/* =====================================================
+   AUTO PAGE SLIDE — 8 DETIK
+   ===================================================== */
+
+let autoAdvanceTimer = null;
+let scrollDebounce = null;
+
+const AUTO_SLIDE_DELAY = 8000;
+
+function getCurrentPage() {
+  let currentPage = null;
+  let smallestDistance = Infinity;
+
+  sections.forEach((section) => {
+    const rect = section.getBoundingClientRect();
+
+    // Abaikan halaman yang tidak terlihat di layar
+    if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
+
+    const distance = Math.abs(rect.top);
+
+    if (distance < smallestDistance) {
+      smallestDistance = distance;
+      currentPage = section;
+    }
+  });
+
+  return currentPage;
+}
+
+function scheduleAutoAdvance() {
+  clearTimeout(autoAdvanceTimer);
+
+  if (!isCoverUnlocked()) return;
+
+  const currentPage = getCurrentPage();
+
+  if (!currentPage || currentPage.id === 'cover') return;
+  if (currentPage.id === 'closing') return;
+
+  // Jangan berpindah saat sedang mengisi formulir
+  const activeElement = document.activeElement;
+
+  if (
+    activeElement &&
+    activeElement.matches('input, textarea, select')
+  ) return;
+
+  autoAdvanceTimer = setTimeout(() => {
+    const latestPage = getCurrentPage();
+
+    if (!latestPage) return;
+
+    const currentIndex = sections.indexOf(latestPage);
+    const nextPage = sections[currentIndex + 1];
+
+    if (nextPage) {
+      nextPage.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+
+  }, AUTO_SLIDE_DELAY);
+}
+
+// Scroll manual tetap bisa digunakan
+window.addEventListener('scroll', () => {
+  clearTimeout(autoAdvanceTimer);
+  clearTimeout(scrollDebounce);
+
+  scrollDebounce = setTimeout(() => {
+    scheduleAutoAdvance();
+  }, 300);
+
+}, { passive: true });
+
+// Hentikan timer ketika pengguna mulai mengisi formulir
+document.addEventListener('focusin', (event) => {
+  if (event.target.matches('input, textarea, select')) {
+    clearTimeout(autoAdvanceTimer);
+  }
+});
+
+// Mulai kembali setelah selesai mengisi formulir
+document.addEventListener('focusout', () => {
+  setTimeout(scheduleAutoAdvance, 300);
+});
+
+
 /* ANIMASI REVEAL */
 const revealElements = document.querySelectorAll(
   '.section-heading,.person,.event-row,.story-row,.story-quote,.gallery-grid,.wish-content,.closing-content,.gift-content'
