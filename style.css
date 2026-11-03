@@ -594,20 +594,24 @@ h2 em{font-weight:400;color:var(--gold2)}
   transform: translateY(0);
 }
 
-.gallery-grid img:nth-child(2) {
-  transition-delay: .15s;
+.gallery-grid.in-view img:nth-child(1) {
+  transition-delay: 0s;
 }
 
-.gallery-grid img:nth-child(3) {
-  transition-delay: .3s;
+.gallery-grid.in-view img:nth-child(2) {
+  transition-delay: .25s;
 }
 
-.gallery-grid img:nth-child(4) {
-  transition-delay: .45s;
+.gallery-grid.in-view img:nth-child(3) {
+  transition-delay: .5s;
 }
 
-.gallery-grid img:nth-child(5) {
-  transition-delay: .6s;
+.gallery-grid.in-view img:nth-child(4) {
+  transition-delay: .75s;
+}
+
+.gallery-grid.in-view img:nth-child(5) {
+  transition-delay: 1s;
 }
 
 /* WISHES / RSVP — HALAMAN 7 */
