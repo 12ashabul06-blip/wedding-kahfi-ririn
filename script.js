@@ -107,7 +107,7 @@ sections.forEach((section) => pageObserver.observe(section));
 
 /* ANIMASI REVEAL */
 const revealElements = document.querySelectorAll(
-  '.section-heading,.person,.event-row,.story-head,.story-gallery,.gallery-grid,.wish-content,.closing-content,.gift-content'
+  '.section-heading,.person,.event-row,.story-row,.story-quote,.gallery-grid,.wish-content,.closing-content,.gift-content'
 );
 
 revealElements.forEach((element) => element.classList.add('reveal'));
