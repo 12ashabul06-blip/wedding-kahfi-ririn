@@ -492,6 +492,36 @@ h2 em{font-weight:400;color:var(--gold2)}
   transform:scale(1.05);
 }
 
+/* ANIMASI FOTO GALERI */
+.gallery-grid img {
+  opacity: 0;
+  transform: translateY(45px);
+  transition:
+    opacity 1s ease,
+    transform 1.2s cubic-bezier(.22, 1, .36, 1);
+}
+
+.gallery-grid.in-view img {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.gallery-grid img:nth-child(2) {
+  transition-delay: .15s;
+}
+
+.gallery-grid img:nth-child(3) {
+  transition-delay: .3s;
+}
+
+.gallery-grid img:nth-child(4) {
+  transition-delay: .45s;
+}
+
+.gallery-grid img:nth-child(5) {
+  transition-delay: .6s;
+}
+
 /* WISHES / RSVP — HALAMAN 7 */
 .wishes{
   background:rgba(20,34,56,.55);
