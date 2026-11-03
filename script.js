@@ -182,7 +182,11 @@ function scheduleAutoAdvance() {
 
   const currentPage = getCurrentPage();
 
-  if (!currentPage || currentPage.id === 'cover') return;
+  if (
+  !currentPage ||
+  currentPage.id === 'cover' ||
+  currentPage.id === 'story'
+) return;
   if (currentPage.id === 'closing') return;
 
   // Jangan berpindah saat sedang mengisi formulir
