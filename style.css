@@ -384,9 +384,10 @@ h2 em{font-weight:400;color:var(--gold2)}
 
 .story-heading h2 {
   font-family: var(--serif);
+  font-style: italic;
   font-size: clamp(55px, 10vw, 100px);
   line-height: .85;
-  font-weight: 500;
+  font-weight: 400;
   color: #eeece7;
   margin: 0;
 }
@@ -496,7 +497,8 @@ h2 em{font-weight:400;color:var(--gold2)}
 /* KALIMAT PENUTUP */
 
 .story-quote {
-  font-family: var(--sans);
+  font-family: var(--serif);
+  font-style: italic;
   font-size: clamp(17px, 2.5vw, 25px);
   line-height: 1.5;
   text-align: center;
