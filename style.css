@@ -57,10 +57,7 @@ a{color:inherit;text-decoration:none}
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  transform: translateY(-45px);
 }
-
 .monogram {
   font: 500 65px var(--serif);
   letter-spacing: -6px;
