@@ -30,16 +30,102 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 button,a{font:inherit}
 a{color:inherit;text-decoration:none}
 
-/* LOADING */
-.loading{
-  position:fixed;inset:0;background:var(--navy);z-index:100;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  color:#eee;gap:12px;transition:opacity .8s,visibility .8s
+/* LOADING SCREEN */
+.loading {
+  position: fixed;
+  inset: 0;
+  background: var(--navy);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eee;
+  text-align: center;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .9s ease, visibility .9s ease;
 }
-.loading.done{opacity:0;visibility:hidden}
-.monogram{font:500 52px var(--serif);letter-spacing:-5px}
-.monogram span{font-size:24px;color:var(--gold);padding:0 5px}
-.loading small{font-size:8px;letter-spacing:4px}
+
+.loading.done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-inner {
+  width: min(300px, 80vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.monogram {
+  font: 500 65px var(--serif);
+  letter-spacing: -6px;
+  color: #f5f1e8;
+  animation: loaderFade 1.5s ease-in-out infinite alternate;
+}
+
+.monogram span {
+  font-size: 30px;
+  color: var(--gold);
+  padding: 0 5px;
+}
+
+.loading-label {
+  font: 500 9px var(--sans);
+  letter-spacing: 4px;
+  margin-top: 12px;
+  color: #d8d8d5;
+}
+
+.loading-names {
+  font: 400 22px var(--serif);
+  letter-spacing: 3px;
+  color: #f5f1e8;
+  margin: 20px 0 30px;
+}
+
+.loading-names span {
+  color: var(--gold);
+}
+
+.loading-progress {
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,.18);
+  overflow: hidden;
+}
+
+.loading-progress span {
+  display: block;
+  width: 35%;
+  height: 100%;
+  background: var(--gold);
+  animation: loadingMove 1.5s ease-in-out infinite;
+}
+
+.loading-status {
+  font: 500 8px var(--sans);
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  margin-top: 17px;
+  animation: loaderFade 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes loadingMove {
+  0% {
+    transform: translateX(-110%);
+  }
+  100% {
+    transform: translateX(310%);
+  }
+}
+
+@keyframes loaderFade {
+  from { opacity: .55; }
+  to { opacity: 1; }
+}
 
 /* HEADER */
 .topbar{
