@@ -963,13 +963,13 @@ h2 em{font-weight:400;color:var(--gold2)}
 
 .story-row {
   grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  gap: 10px;
   margin-bottom: 25px;
   align-items: center;
 }
 
 .story-text {
-  font-size: clamp(12px, 3.4vw, 16px);
+  font-size: clamp(9px, 3.4vw, 14px);
   line-height: 1.4;
 }
 
@@ -983,7 +983,7 @@ h2 em{font-weight:400;color:var(--gold2)}
 }
 
 .story-quote {
-  font-size: clamp(15px, 4vw, 19px);
+  font-size: clamp(10px, 4vw, 16px);
   line-height: 1.45;
   margin-top: 25px;
 }
