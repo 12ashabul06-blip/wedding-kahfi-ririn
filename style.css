@@ -435,7 +435,7 @@ h2 em{font-weight:400;color:var(--gold2)}
 
 .story-text {
   font-family: var(--sans);
-  font-size: clamp(11px, 1.5vw, 17px);
+  font-size: clamp(9px, 1.5vw, 17px);
   line-height: 1.4;
   color: #eeece7;
   text-align: left;
