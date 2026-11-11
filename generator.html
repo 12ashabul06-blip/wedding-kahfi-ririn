@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -55,70 +56,167 @@ th{font-size:10px;letter-spacing:1px;color:var(--muted)}
 .empty{text-align:center;color:var(--muted);padding:25px;font-size:13px}
 .small{font-size:11px;color:var(--muted);line-height:1.6}
 .footer{text-align:center;margin-top:25px;font-size:10px;letter-spacing:2px;color:var(--muted)}
-@media(max-width:620px){body{padding:10px}.shell{margin:8px auto;padding:20px 15px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.stats{gap:7px}.stat{padding:12px 9px}.stat strong{font-size:25px}.stat span{font-size:9px}.topbar{align-items:flex-start}.topbar button{padding:10px}.toolbar{flex-direction:column;align-items:stretch}}
+@media(max-width:620px){
+body{padding:10px}
+.shell{margin:8px auto;padding:20px 15px}
+.form-grid{grid-template-columns:1fr}
+.field.full{grid-column:auto}
+.stats{gap:7px}
+.stat{padding:12px 9px}
+.stat strong{font-size:25px}
+.stat span{font-size:9px}
+.topbar{align-items:flex-start}
+.topbar button{padding:10px}
+.toolbar{flex-direction:column;align-items:stretch}
+}
 </style>
 </head>
 <body>
 <main class="shell">
-  <section id="loginView">
-    <div class="brand">
-      <div class="monogram">K<span>&amp;</span>R</div>
-      <p class="eyebrow">THE WEDDING OF</p>
-      <h1>Login Admin</h1>
-      <p class="desc">Masuk untuk mengelola daftar tamu undangan Kahfi &amp; Ririn.</p>
+
+<section id="loginView">
+  <div class="brand">
+    <div class="monogram">K<span>&amp;</span>R</div>
+    <p class="eyebrow">THE WEDDING OF</p>
+    <h1>Login / Daftar</h1>
+    <p class="desc">Admin dan teman yang membantu dapat masuk dengan akun masing-masing.</p>
+  </div>
+
+  <form id="loginForm">
+    <div class="field">
+      <label for="authEmail">EMAIL</label>
+      <input id="authEmail" type="email" autocomplete="username" required placeholder="Alamat email">
     </div>
-    <form id="loginForm">
-      <div class="field"><label for="adminEmail">EMAIL ADMIN</label><input id="adminEmail" type="email" autocomplete="username" required placeholder="Email admin"></div>
-      <div class="field" style="margin-top:14px"><label for="adminPassword">PASSWORD</label><input id="adminPassword" type="password" autocomplete="current-password" required placeholder="Password"></div>
-      <div class="actions"><button id="loginBtn" type="submit">MASUK</button></div>
-      <p id="loginMessage" class="notice"></p>
+
+    <div class="field" style="margin-top:14px">
+      <label for="authPassword">PASSWORD</label>
+      <input id="authPassword" type="password" autocomplete="current-password" minlength="6" required placeholder="Minimal 6 karakter">
+    </div>
+
+    <div class="actions">
+      <button id="loginBtn" type="submit">LOGIN</button>
+      <button id="signupBtn" class="gold" type="button">SIGN UP USER</button>
+    </div>
+
+    <p class="small">Akun yang mendaftar melalui Sign Up akan menjadi User biasa, bukan Admin.</p>
+    <p id="loginMessage" class="notice"></p>
+  </form>
+</section>
+
+<section id="dashboardView" class="hidden">
+  <div class="topbar">
+    <div>
+      <p class="eyebrow">KAHFI &amp; RIRIN · <span id="roleLabel">AKUN</span></p>
+      <h1>Daftar Tamu</h1>
+      <p id="dashboardDescription" class="small">Kelola link undangan pribadi dan status pengiriman.</p>
+    </div>
+    <button id="logoutBtn" class="secondary" type="button">KELUAR</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><strong id="totalCount">0</strong><span>TOTAL TAMU</span></div>
+    <div class="stat"><strong id="sentCount">0</strong><span>SUDAH DIKIRIM</span></div>
+    <div class="stat"><strong id="openCount">0</strong><span>TOTAL PEMBUKAAN</span></div>
+  </div>
+
+  <section class="panel">
+    <h2 id="formTitle">Tambah Tamu</h2>
+
+    <form id="guestForm">
+      <input type="hidden" id="editingId">
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="guestName">NAMA TAMU</label>
+          <input id="guestName" required maxlength="120" placeholder="Nama tamu">
+        </div>
+
+        <div class="field">
+          <label for="guestPhone">WHATSAPP (OPSIONAL)</label>
+          <input id="guestPhone" inputmode="tel" placeholder="Contoh: 628123456789">
+        </div>
+
+        <div class="field">
+          <label for="guestRelation">HUBUNGAN</label>
+          <select id="guestRelation">
+            <option value="">Pilih hubungan</option>
+            <option>Teman</option>
+            <option>Teman kampus</option>
+            <option>Teman kerja</option>
+            <option>Keluarga</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="maxAttendees">MAKSIMAL TAMU</label>
+          <input id="maxAttendees" type="number" min="1" max="20" value="3" required>
+        </div>
+
+        <div class="field full">
+          <label for="eventAccess">AKSES ACARA</label>
+          <select id="eventAccess">
+            <option value="akad,resepsi">Akad Nikah &amp; Resepsi</option>
+            <option value="akad">Akad Nikah saja</option>
+            <option value="resepsi">Resepsi saja</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="saveGuestBtn" type="submit">SIMPAN TAMU</button>
+        <button id="cancelEditBtn" class="secondary hidden" type="button">BATAL EDIT</button>
+      </div>
+
+      <p id="formMessage" class="notice"></p>
     </form>
   </section>
 
-  <section id="dashboardView" class="hidden">
-    <div class="topbar">
-      <div><p class="eyebrow">KAHFI &amp; RIRIN · ADMIN</p><h1>Daftar Tamu</h1><p class="small">Kelola link undangan pribadi dan status pengiriman.</p></div>
-      <button id="logoutBtn" class="secondary" type="button">KELUAR</button>
+  <section class="panel">
+    <div class="topbar" style="margin:0">
+      <h2>Daftar Tamu</h2>
+      <button id="refreshBtn" class="secondary" type="button">MUAT ULANG</button>
     </div>
 
-    <div class="stats">
-      <div class="stat"><strong id="totalCount">0</strong><span>TOTAL TAMU</span></div>
-      <div class="stat"><strong id="sentCount">0</strong><span>SUDAH DIKIRIM</span></div>
-      <div class="stat"><strong id="openCount">0</strong><span>TOTAL PEMBUKAAN</span></div>
+    <div class="toolbar">
+      <input id="searchInput" type="search" placeholder="Cari nama tamu atau WhatsApp...">
+
+      <select id="statusFilter" style="max-width:180px">
+        <option value="all">Semua status</option>
+        <option value="pending">Belum dikirim</option>
+        <option value="sent">Sudah dikirim</option>
+      </select>
+
+      <select id="ownerFilter" class="hidden" style="max-width:160px">
+        <option value="all">Semua pemilik</option>
+        <option value="admin">Tamu Admin</option>
+        <option value="user">Tamu User</option>
+      </select>
     </div>
 
-    <section class="panel">
-      <h2 id="formTitle">Tambah Tamu</h2>
-      <form id="guestForm">
-        <input type="hidden" id="editingId">
-        <div class="form-grid">
-          <div class="field"><label for="guestName">NAMA TAMU</label><input id="guestName" required maxlength="120" placeholder="Nama tamu"></div>
-          <div class="field"><label for="guestPhone">WHATSAPP (OPSIONAL)</label><input id="guestPhone" inputmode="tel" placeholder="Contoh: 628123456789"></div>
-          <div class="field"><label for="guestRelation">HUBUNGAN</label><select id="guestRelation"><option value="">Pilih hubungan</option><option>Teman</option><option>Teman kampus</option><option>Teman kerja</option><option>Keluarga</option><option>Lainnya</option></select></div>
-          <div class="field"><label for="maxAttendees">MAKSIMAL TAMU</label><input id="maxAttendees" type="number" min="1" max="20" value="3" required></div>
-          <div class="field full"><label for="eventAccess">AKSES ACARA</label><select id="eventAccess"><option value="akad,resepsi">Akad Nikah &amp; Resepsi</option><option value="akad">Akad Nikah saja</option><option value="resepsi">Resepsi saja</option></select></div>
-        </div>
-        <div class="actions">
-          <button id="saveGuestBtn" type="submit">SIMPAN TAMU</button>
-          <button id="cancelEditBtn" class="secondary hidden" type="button">BATAL EDIT</button>
-        </div>
-        <p id="formMessage" class="notice"></p>
-      </form>
-    </section>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>NAMA / HUBUNGAN</th>
+            <th>PEMILIK</th>
+            <th>LINK PRIBADI</th>
+            <th>PEMBUKAAN</th>
+            <th>STATUS</th>
+            <th>AKSI</th>
+          </tr>
+        </thead>
+        <tbody id="guestRows">
+          <tr><td colspan="6" class="empty">Memuat daftar tamu...</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-    <section class="panel">
-      <div class="topbar" style="margin:0"><h2>Daftar Tamu</h2><button id="refreshBtn" class="secondary" type="button">MUAT ULANG</button></div>
-      <div class="toolbar"><input id="searchInput" type="search" placeholder="Cari nama tamu atau WhatsApp..."><select id="statusFilter" style="max-width:180px"><option value="all">Semua status</option><option value="pending">Belum dikirim</option><option value="sent">Sudah dikirim</option></select></div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>NAMA / HUBUNGAN</th><th>LINK PRIBADI</th><th>PEMBUKAAN</th><th>STATUS</th><th>AKSI</th></tr></thead>
-          <tbody id="guestRows"><tr><td colspan="5" class="empty">Memuat daftar tamu...</td></tr></tbody>
-        </table>
-      </div>
-      <p id="listMessage" class="small"></p>
-    </section>
+    <p id="listMessage" class="small"></p>
   </section>
-  <div class="footer">KAHFI &amp; RIRIN · 2026</div>
+</section>
+
+<div class="footer">KAHFI &amp; RIRIN · 2026</div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -129,63 +227,137 @@ const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const invitationURL = 'https://12ashabul06-blip.github.io/wedding-kahfi-ririn/';
 const $ = (id) => document.getElementById(id);
+
 let guestsCache = [];
+let currentUser = null;
+let currentIsAdmin = false;
 
 function slugify(value) {
   return value.normalize('NFD').replace(/[\u0300-\u036f]/g,'')
     .toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') || 'tamu';
 }
+
 function makeGuestLink(guest) {
   return invitationURL + '?to=' + encodeURIComponent(guest.guest_name) +
     '&guest=' + encodeURIComponent(guest.guest_slug);
 }
+
 function showMessage(id, message, success=false) {
-  const el = $(id); el.textContent = message;
+  const el = $(id);
+  el.textContent = message;
   el.style.color = success ? '#28613a' : '#8d3434';
 }
+
 function setLoggedIn(isLoggedIn) {
   $('loginView').classList.toggle('hidden', isLoggedIn);
   $('dashboardView').classList.toggle('hidden', !isLoggedIn);
 }
-async function checkAdmin(session) {
-  if (!session) { setLoggedIn(false); return false; }
-  const { data, error } = await supabaseClient.rpc('is_admin');
-  if (error || data !== true) {
-    await supabaseClient.auth.signOut();
+
+async function enterDashboard(session) {
+  if (!session) {
+    currentUser = null;
+    currentIsAdmin = false;
     setLoggedIn(false);
-    showMessage('loginMessage', 'Akun berhasil login, tetapi email ini belum terdaftar sebagai admin. Periksa tabel admin_users.');
     return false;
   }
+
+  currentUser = session.user;
+
+  const { data, error } = await supabaseClient.rpc('is_admin');
+  currentIsAdmin = !error && data === true;
+
   setLoggedIn(true);
+
+  $('roleLabel').textContent = currentIsAdmin ? 'ADMIN' : 'USER';
+
+  $('dashboardDescription').textContent = currentIsAdmin
+    ? 'Admin dapat melihat dan mengelola seluruh tamu, termasuk tamu yang ditambahkan User.'
+    : 'Kamu hanya dapat melihat dan mengelola daftar tamu yang kamu tambahkan sendiri.';
+
+  $('ownerFilter').classList.toggle('hidden', !currentIsAdmin);
+
   await loadGuests();
   return true;
 }
 
 $('loginForm').addEventListener('submit', async (event) => {
   event.preventDefault();
+
   $('loginBtn').disabled = true;
   showMessage('loginMessage','Memeriksa akun...',true);
+
   const { data, error } = await supabaseClient.auth.signInWithPassword({
-    email: $('adminEmail').value.trim(),
-    password: $('adminPassword').value
+    email: $('authEmail').value.trim(),
+    password: $('authPassword').value
   });
+
   $('loginBtn').disabled = false;
-  if (error) { showMessage('loginMessage','Login gagal: ' + error.message); return; }
-  await checkAdmin(data.session);
+
+  if (error) {
+    showMessage('loginMessage','Login gagal: ' + error.message);
+    return;
+  }
+
+  await enterDashboard(data.session);
 });
+
+$('signupBtn').addEventListener('click', async () => {
+  const email = $('authEmail').value.trim();
+  const password = $('authPassword').value;
+
+  if (!email || password.length < 6) {
+    showMessage('loginMessage','Isi email dan password minimal 6 karakter terlebih dahulu.');
+    return;
+  }
+
+  $('signupBtn').disabled = true;
+  showMessage('loginMessage','Mendaftarkan akun User...',true);
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email,
+    password
+  });
+
+  $('signupBtn').disabled = false;
+
+  if (error) {
+    showMessage('loginMessage','Pendaftaran gagal: ' + error.message);
+    return;
+  }
+
+  if (data.session) {
+    await enterDashboard(data.session);
+  } else {
+    showMessage('loginMessage','Pendaftaran berhasil. Periksa email untuk konfirmasi akun, lalu login di halaman ini.',true);
+  }
+});
+
 $('logoutBtn').addEventListener('click', async () => {
   await supabaseClient.auth.signOut();
+
+  currentUser = null;
+  currentIsAdmin = false;
+
   setLoggedIn(false);
 });
+
 supabaseClient.auth.onAuthStateChange((_event, session) => {
-  if (!session) setLoggedIn(false);
+  if (!session) {
+    currentUser = null;
+    currentIsAdmin = false;
+    setLoggedIn(false);
+  }
 });
+
 $('guestForm').addEventListener('submit', async (event) => {
   event.preventDefault();
+
   $('saveGuestBtn').disabled = true;
   showMessage('formMessage','Menyimpan data...',true);
+
   const id = $('editingId').value;
   const name = $('guestName').value.trim();
+
   const payload = {
     guest_name: name,
     phone: $('guestPhone').value.trim() || null,
@@ -193,132 +365,280 @@ $('guestForm').addEventListener('submit', async (event) => {
     max_attendees: Number($('maxAttendees').value),
     event_access: $('eventAccess').value.split(',')
   };
+
   try {
     if (id) {
-      const { error } = await supabaseClient.from('guests').update(payload).eq('id',id);
+      const { error } = await supabaseClient
+        .from('guests')
+        .update(payload)
+        .eq('id',id);
+
       if (error) throw error;
+
       showMessage('formMessage','Data tamu berhasil diperbarui.',true);
     } else {
       let slug = slugify(name);
       let candidate = slug;
       let suffix = 2;
-      while (guestsCache.some(g => g.guest_slug === candidate)) candidate = slug + '-' + suffix++;
+
+      while (guestsCache.some(g => g.guest_slug === candidate)) {
+        candidate = slug + '-' + suffix++;
+      }
+
       payload.guest_slug = candidate;
-      const { error } = await supabaseClient.from('guests').insert(payload);
+      payload.created_by = currentUser.id;
+      payload.owner_type = currentIsAdmin ? 'admin' : 'user';
+
+      const { error } = await supabaseClient
+        .from('guests')
+        .insert(payload);
+
       if (error) throw error;
+
       showMessage('formMessage','Tamu berhasil ditambahkan.',true);
     }
+
     resetGuestForm();
     await loadGuests();
+
   } catch (error) {
     showMessage('formMessage','Gagal menyimpan: ' + error.message);
-  } finally { $('saveGuestBtn').disabled = false; }
+  } finally {
+    $('saveGuestBtn').disabled = false;
+  }
 });
+
 function resetGuestForm() {
-  $('guestForm').reset(); $('editingId').value=''; $('maxAttendees').value=3;
-  $('formTitle').textContent='Tambah Tamu'; $('saveGuestBtn').textContent='SIMPAN TAMU';
+  $('guestForm').reset();
+  $('editingId').value = '';
+  $('maxAttendees').value = 3;
+  $('formTitle').textContent = 'Tambah Tamu';
+  $('saveGuestBtn').textContent = 'SIMPAN TAMU';
   $('cancelEditBtn').classList.add('hidden');
 }
+
 $('cancelEditBtn').addEventListener('click',resetGuestForm);
 
 async function loadGuests() {
-  $('guestRows').innerHTML = '<tr><td colspan="5" class="empty">Memuat...</td></tr>';
-  const { data, error } = await supabaseClient.from('guests')
-    .select('id,guest_name,guest_slug,phone,relation,max_attendees,event_access,delivery_status,sent_at,created_at,guest_open_events(count)')
+  $('guestRows').innerHTML = '<tr><td colspan="6" class="empty">Memuat...</td></tr>';
+
+  const { data, error } = await supabaseClient
+    .from('guests')
+    .select('id,guest_name,guest_slug,phone,relation,max_attendees,event_access,delivery_status,sent_at,created_at,owner_type,created_by,guest_open_events(count)')
     .order('created_at',{ascending:false});
+
   if (error) {
-    $('guestRows').innerHTML = '<tr><td colspan="5" class="empty">Gagal memuat: '+escapeHTML(error.message)+'</td></tr>';
+    $('guestRows').innerHTML =
+      '<tr><td colspan="6" class="empty">Gagal memuat: '+escapeHTML(error.message)+'</td></tr>';
     return;
   }
+
   guestsCache = data || [];
-  const totalOpens = guestsCache.reduce((sum,g)=>sum + (g.guest_open_events?.[0]?.count || 0),0);
+
+  const totalOpens = guestsCache.reduce(
+    (sum,g) => sum + (g.guest_open_events?.[0]?.count || 0),0
+  );
+
   $('totalCount').textContent = guestsCache.length;
-  $('sentCount').textContent = guestsCache.filter(g=>g.delivery_status==='sent').length;
+  $('sentCount').textContent = guestsCache.filter(g => g.delivery_status === 'sent').length;
   $('openCount').textContent = totalOpens;
+
   renderGuests();
 }
+
 function escapeHTML(value) {
-  return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  return String(value ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  }[c]));
 }
+
 function renderGuests() {
   const term = $('searchInput').value.trim().toLowerCase();
   const status = $('statusFilter').value;
+  const owner = $('ownerFilter').value;
+
   const rows = guestsCache.filter(g =>
     (g.guest_name.toLowerCase().includes(term) || (g.phone||'').toLowerCase().includes(term)) &&
-    (status==='all' || g.delivery_status===status)
+    (status === 'all' || g.delivery_status === status) &&
+    (!currentIsAdmin || owner === 'all' || g.owner_type === owner)
   );
+
   if (!rows.length) {
-    $('guestRows').innerHTML='<tr><td colspan="5" class="empty">Belum ada tamu yang cocok.</td></tr>'; return;
+    $('guestRows').innerHTML =
+      '<tr><td colspan="6" class="empty">Belum ada tamu yang cocok.</td></tr>';
+    return;
   }
+
   $('guestRows').innerHTML = rows.map(g => {
     const link = makeGuestLink(g);
     const count = g.guest_open_events?.[0]?.count || 0;
-    const sent = g.delivery_status==='sent';
+    const sent = g.delivery_status === 'sent';
+
     return `<tr>
-      <td><strong>${escapeHTML(g.guest_name)}</strong><br><span class="small">${escapeHTML(g.relation||'—')} · Maks. ${g.max_attendees} orang</span></td>
-      <td><a class="link" href="${escapeHTML(link)}" target="_blank" rel="noopener">${escapeHTML(link)}</a><button class="secondary" data-action="copy" data-id="${g.id}" style="margin-top:6px">SALIN LINK</button></td>
+      <td>
+        <strong>${escapeHTML(g.guest_name)}</strong><br>
+        <span class="small">${escapeHTML(g.relation||'—')} · Maks. ${g.max_attendees} orang</span>
+      </td>
+
+      <td>
+        <span class="status ${g.owner_type==='admin'?'sent':''}">
+          ${g.owner_type==='admin'?'ADMIN':'USER'}
+        </span>
+      </td>
+
+      <td>
+        <a class="link" href="${escapeHTML(link)}" target="_blank" rel="noopener">${escapeHTML(link)}</a>
+        <button class="secondary" data-action="copy" data-id="${g.id}" style="margin-top:6px">SALIN LINK</button>
+      </td>
+
       <td>${count}</td>
-      <td><span class="status ${sent?'sent':''}">${sent?'TERKIRIM':'BELUM DIKIRIM'}</span></td>
-      <td><div class="row-actions">
-        <button data-action="whatsapp" data-id="${g.id}" class="gold">WA</button>
-        <button data-action="toggle" data-id="${g.id}" class="secondary">${sent?'BATAL KIRIM':'TERKIRIM'}</button>
-        <button data-action="edit" data-id="${g.id}" class="secondary">EDIT</button>
-        <button data-action="delete" data-id="${g.id}" class="danger">HAPUS</button>
-      </div></td>
+
+      <td>
+        <span class="status ${sent?'sent':''}">
+          ${sent?'TERKIRIM':'BELUM DIKIRIM'}
+        </span>
+      </td>
+
+      <td>
+        <div class="row-actions">
+          <button data-action="whatsapp" data-id="${g.id}" class="gold">WA</button>
+          <button data-action="toggle" data-id="${g.id}" class="secondary">${sent?'BATAL KIRIM':'TERKIRIM'}</button>
+          <button data-action="edit" data-id="${g.id}" class="secondary">EDIT</button>
+          <button data-action="delete" data-id="${g.id}" class="danger">HAPUS</button>
+        </div>
+      </td>
     </tr>`;
   }).join('');
 }
+
 $('searchInput').addEventListener('input',renderGuests);
 $('statusFilter').addEventListener('change',renderGuests);
+$('ownerFilter').addEventListener('change',renderGuests);
 $('refreshBtn').addEventListener('click',loadGuests);
+
 $('guestRows').addEventListener('click', async (event) => {
   const button = event.target.closest('button[data-action]');
   if (!button) return;
-  const guest = guestsCache.find(g=>g.id===button.dataset.id);
+
+  const guest = guestsCache.find(g => g.id === button.dataset.id);
   if (!guest) return;
+
   const action = button.dataset.action;
-  if (action==='copy') {
-    try { await navigator.clipboard.writeText(makeGuestLink(guest)); showMessage('listMessage','Link berhasil disalin.',true); }
-    catch { window.prompt('Salin link ini:',makeGuestLink(guest)); }
+
+  if (action === 'copy') {
+    try {
+      await navigator.clipboard.writeText(makeGuestLink(guest));
+      showMessage('listMessage','Link berhasil disalin.',true);
+    } catch {
+      window.prompt('Salin link ini:',makeGuestLink(guest));
+    }
   }
-  if (action==='whatsapp') {
+
+  if (action === 'whatsapp') {
     const link = makeGuestLink(guest);
-    const message = `Kepada Yth. Bapak/Ibu/Saudara/i ${guest.guest_name}\n\nDengan hormat, kami mengundang Anda untuk menghadiri pernikahan Kahfi & Ririn.\n\nSilakan buka undangan pribadi berikut:\n${link}\n\nMerupakan kebahagiaan bagi kami apabila Anda berkenan hadir. Terima kasih.`;
+
+    const message = `Kepada Yth. Bapak/Ibu/Saudara/i ${guest.guest_name}
+
+Dengan hormat, kami mengundang Anda untuk menghadiri pernikahan Kahfi & Ririn.
+
+Silakan buka undangan pribadi berikut:
+${link}
+
+Merupakan kebahagiaan bagi kami apabila Anda berkenan hadir. Terima kasih.`;
+
     if (guest.phone) {
       const phone = guest.phone.replace(/\D/g,'').replace(/^0/,'62');
-      window.open('https://wa.me/'+phone+'?text='+encodeURIComponent(message),'_blank','noopener');
+
+      window.open(
+        'https://wa.me/'+phone+'?text='+encodeURIComponent(message),
+        '_blank',
+        'noopener'
+      );
     } else {
-      window.open('https://wa.me/?text='+encodeURIComponent(message),'_blank','noopener');
+      window.open(
+        'https://wa.me/?text='+encodeURIComponent(message),
+        '_blank',
+        'noopener'
+      );
     }
-    if (guest.delivery_status!=='sent') await updateStatus(guest,'sent');
+
+    showMessage(
+      'listMessage',
+      'WhatsApp dibuka. Tandai TERKIRIM secara manual setelah pesan benar-benar dikirim.',
+      true
+    );
   }
-  if (action==='toggle') await updateStatus(guest,guest.delivery_status==='sent'?'pending':'sent');
-  if (action==='edit') {
-    $('editingId').value=guest.id; $('guestName').value=guest.guest_name;
-    $('guestPhone').value=guest.phone||''; $('guestRelation').value=guest.relation||'';
-    $('maxAttendees').value=guest.max_attendees;
-    $('eventAccess').value=(guest.event_access||['akad','resepsi']).join(',');
-    $('formTitle').textContent='Edit Data Tamu'; $('saveGuestBtn').textContent='SIMPAN PERUBAHAN';
+
+  if (action === 'toggle') {
+    await updateStatus(
+      guest,
+      guest.delivery_status === 'sent' ? 'pending' : 'sent'
+    );
+  }
+
+  if (action === 'edit') {
+    $('editingId').value = guest.id;
+    $('guestName').value = guest.guest_name;
+    $('guestPhone').value = guest.phone || '';
+    $('guestRelation').value = guest.relation || '';
+    $('maxAttendees').value = guest.max_attendees;
+    $('eventAccess').value = (guest.event_access || ['akad','resepsi']).join(',');
+
+    $('formTitle').textContent = 'Edit Data Tamu';
+    $('saveGuestBtn').textContent = 'SIMPAN PERUBAHAN';
     $('cancelEditBtn').classList.remove('hidden');
+
     window.scrollTo({top:0,behavior:'smooth'});
   }
-  if (action==='delete') {
+
+  if (action === 'delete') {
     if (!confirm('Hapus tamu '+guest.guest_name+'? Riwayat pembukaannya juga akan terhapus.')) return;
-    const {error}=await supabaseClient.from('guests').delete().eq('id',guest.id);
-    if(error) showMessage('listMessage','Gagal menghapus: '+error.message);
-    else {showMessage('listMessage','Tamu berhasil dihapus.',true);await loadGuests();}
+
+    const {error} = await supabaseClient
+      .from('guests')
+      .delete()
+      .eq('id',guest.id);
+
+    if (error) {
+      showMessage('listMessage','Gagal menghapus: '+error.message);
+    } else {
+      showMessage('listMessage','Tamu berhasil dihapus.',true);
+      await loadGuests();
+    }
   }
 });
+
 async function updateStatus(guest,status) {
-  const payload = {delivery_status:status, sent_at:status==='sent'?new Date().toISOString():null};
-  const {error}=await supabaseClient.from('guests').update(payload).eq('id',guest.id);
-  if(error) showMessage('listMessage','Gagal mengubah status: '+error.message);
-  else {showMessage('listMessage','Status pengiriman diperbarui.',true);await loadGuests();}
+  const payload = {
+    delivery_status:status,
+    sent_at:status === 'sent' ? new Date().toISOString() : null
+  };
+
+  const {error} = await supabaseClient
+    .from('guests')
+    .update(payload)
+    .eq('id',guest.id);
+
+  if (error) {
+    showMessage('listMessage','Gagal mengubah status: '+error.message);
+  } else {
+    showMessage('listMessage','Status pengiriman diperbarui.',true);
+    await loadGuests();
+  }
 }
-(async function init(){
+
+(async function init() {
   const {data:{session}} = await supabaseClient.auth.getSession();
-  if(session) await checkAdmin(session);
-  else setLoggedIn(false);
+
+  if (session) {
+    await enterDashboard(session);
+  } else {
+    setLoggedIn(false);
+  }
 })();
 </script>
 </body>
