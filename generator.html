@@ -241,6 +241,20 @@ function makeGuestLink(guest) {
   return invitationURL + '?to=' + encodeURIComponent(guest.guest_name) +
     '&guest=' + encodeURIComponent(guest.guest_slug);
 }
+function makeGuestMessage(guest) {
+  const link = makeGuestLink(guest);
+
+  return `Kepada Yth. Bapak/Ibu/Saudara/i ${guest.guest_name}
+
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Anda untuk menghadiri momen istimewa kebahagiaan kami.
+
+Detail lengkap mengenai waktu, lokasi, dan galeri acara dapat diakses melalui tautan undangan digital berikut:
+${link}
+
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir untuk memberikan doa restu bagi kedua mempelai.
+
+Terima kasih banyak atas perhatian dan pengertiannya.`;
+}
 
 function showMessage(id, message, success=false) {
   const el = $(id);
@@ -506,6 +520,7 @@ function renderGuests() {
       <td>
         <div class="row-actions">
           <button data-action="whatsapp" data-id="${g.id}" class="gold">WA</button>
+          <button data-action="share" data-id="${g.id}" class="secondary">BAGIKAN UCAPAN</button>
           <button data-action="toggle" data-id="${g.id}" class="secondary">${sent?'BATAL KIRIM':'TERKIRIM'}</button>
           <button data-action="edit" data-id="${g.id}" class="secondary">EDIT</button>
           <button data-action="delete" data-id="${g.id}" class="danger">HAPUS</button>
@@ -543,12 +558,14 @@ $('guestRows').addEventListener('click', async (event) => {
 
     const message = `Kepada Yth. Bapak/Ibu/Saudara/i ${guest.guest_name}
 
-Dengan hormat, kami mengundang Anda untuk menghadiri pernikahan Kahfi & Ririn.
+Tanpa mengurangi rasa hormat, perkenankan kami mengundang Anda untuk menghadiri momen istimewa kebahagiaan kami.
 
-Silakan buka undangan pribadi berikut:
+Detail lengkap mengenai waktu, lokasi, dan galeri acara dapat diakses melalui tautan undangan digital berikut:
 ${link}
 
-Merupakan kebahagiaan bagi kami apabila Anda berkenan hadir. Terima kasih.`;
+Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Anda berkenan hadir untuk memberikan doa restu bagi kedua mempelai.
+
+Terima kasih banyak atas perhatian dan pengertiannya.`;
 
     if (guest.phone) {
       const phone = guest.phone.replace(/\D/g,'').replace(/^0/,'62');
@@ -572,6 +589,40 @@ Merupakan kebahagiaan bagi kami apabila Anda berkenan hadir. Terima kasih.`;
       true
     );
   }
+  
+  if (action==='share') {
+  const message = makeGuestMessage(guest);
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'Undangan Pernikahan Kahfi & Ririn',
+        text: message
+      });
+
+      showMessage(
+        'listMessage',
+        'Menu bagikan dibuka. Pilih aplikasi tujuan.',
+        true
+      );
+    } catch (error) {
+      if (error.name !== 'AbortError') {
+        showMessage('listMessage', 'Gagal membagikan ucapan.');
+      }
+    }
+  } else {
+    try {
+      await navigator.clipboard.writeText(message);
+      showMessage(
+        'listMessage',
+        'Ucapan berhasil disalin. Silakan tempelkan.',
+        true
+      );
+    } catch {
+      window.prompt('Salin ucapan undangan ini:', message);
+    }
+  }
+}
 
   if (action === 'toggle') {
     await updateStatus(
